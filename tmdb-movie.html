@@ -13,7 +13,7 @@
     <title>Movie | CineMind</title>
 
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="watch.css">
 
 </head>
 
@@ -55,6 +55,8 @@
 
     <main class="details-page">
 
+        <!-- BACKDROP -->
+
         <section
             id="movieBackdrop"
             class="details-backdrop"
@@ -72,6 +74,8 @@
 
         </section>
 
+
+        <!-- MAIN DETAILS -->
 
         <section class="details-main">
 
@@ -231,6 +235,40 @@
         </section>
 
 
+        <!-- WHERE TO WATCH -->
+
+        <section class="watch-section">
+
+            <div class="watch-heading">
+
+                <p class="section-label">
+                    STREAMING
+                </p>
+
+                <h2>
+                    Where to watch in Bulgaria
+                </h2>
+
+                <p>
+                    Availability information is provided by TMDB.
+                </p>
+
+            </div>
+
+
+            <div id="movieWatchProviders">
+
+                <div class="watch-empty">
+                    Loading streaming information...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAST -->
+
         <section class="details-section">
 
             <div class="details-section-heading">
@@ -253,6 +291,8 @@
 
         </section>
 
+
+        <!-- PRODUCTION -->
 
         <section class="details-section">
 
@@ -345,7 +385,6 @@
 
     <script src="config.js"></script>
     <script src="tmdb-movie.js"></script>
-    
 
 </body>
 

@@ -7,6 +7,9 @@ const TMDB_IMAGE_URL =
 const TMDB_BACKDROP_URL =
     "https://image.tmdb.org/t/p/original";
 
+const TMDB_PROVIDER_IMAGE_URL =
+    "https://image.tmdb.org/t/p/original";
+
 
 const params =
     new URLSearchParams(
@@ -110,6 +113,11 @@ const tvCountry =
 const tvSeasonCount =
     document.getElementById(
         "tvSeasonCount"
+    );
+
+const tvWatchProviders =
+    document.getElementById(
+        "tvWatchProviders"
     );
 
 const watchedTVButton =
@@ -333,7 +341,9 @@ function setupTVButtons(tv) {
                 );
 
 
-                saveTVData(tv);
+                saveTVData(
+                    tv
+                );
 
 
                 tvActionMessage.textContent =
@@ -389,7 +399,9 @@ function setupTVButtons(tv) {
                 );
 
 
-                saveTVData(tv);
+                saveTVData(
+                    tv
+                );
 
 
                 tvActionMessage.textContent =
@@ -519,6 +531,237 @@ function setupTrailer(videos) {
 
 
 // ==================================================
+// WATCH PROVIDERS
+// ==================================================
+
+function removeDuplicateProviders(
+    providers
+) {
+
+    const unique = [];
+
+    const ids = new Set();
+
+
+    providers.forEach(
+        function(provider) {
+
+            if (
+                !ids.has(
+                    provider.provider_id
+                )
+            ) {
+
+                ids.add(
+                    provider.provider_id
+                );
+
+                unique.push(
+                    provider
+                );
+
+            }
+
+        }
+    );
+
+
+    return unique;
+
+}
+
+
+function providerHTML(provider) {
+
+    return `
+
+        <div class="watch-provider">
+
+            ${
+                provider.logo_path
+
+                    ? `
+                        <img
+                            src="${TMDB_PROVIDER_IMAGE_URL}${provider.logo_path}"
+                            alt="${provider.provider_name}"
+                        >
+                    `
+
+                    : ""
+            }
+
+            <span>
+                ${provider.provider_name}
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+function createProviderGroup(
+    title,
+    providers
+) {
+
+    if (
+        !providers ||
+        !providers.length
+    ) {
+
+        return "";
+
+    }
+
+
+    const cleanProviders =
+        removeDuplicateProviders(
+            providers
+        );
+
+
+    return `
+
+        <div class="watch-provider-group">
+
+            <h3>
+                ${title}
+            </h3>
+
+            <div class="watch-provider-list">
+
+                ${
+                    cleanProviders
+                        .map(
+                            provider =>
+                                providerHTML(
+                                    provider
+                                )
+                        )
+                        .join("")
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function renderWatchProviders(
+    providerData
+) {
+
+    const bulgaria =
+        providerData.results?.BG;
+
+
+    if (!bulgaria) {
+
+        tvWatchProviders.innerHTML = `
+
+            <div class="watch-empty">
+
+                No streaming information is currently
+                available for Bulgaria.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let groups = "";
+
+
+    groups +=
+        createProviderGroup(
+            "▶ Streaming",
+            bulgaria.flatrate
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "🆓 Free",
+            bulgaria.free
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "📺 With Ads",
+            bulgaria.ads
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "💳 Rent",
+            bulgaria.rent
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "🛒 Buy",
+            bulgaria.buy
+        );
+
+
+    if (!groups) {
+
+        groups = `
+
+            <div class="watch-empty">
+
+                No streaming services are currently
+                listed for this TV series in Bulgaria.
+
+            </div>
+
+        `;
+
+    }
+
+
+    const link =
+        bulgaria.link
+
+            ? `
+                <a
+                    class="watch-tmdb-link"
+                    href="${bulgaria.link}"
+                    target="_blank"
+                >
+                    Check availability on TMDB ↗
+                </a>
+            `
+
+            : "";
+
+
+    tvWatchProviders.innerHTML = `
+
+        <div class="watch-provider-groups">
+            ${groups}
+        </div>
+
+        ${link}
+
+    `;
+
+}
+
+
+// ==================================================
 // LOAD TV
 // ==================================================
 
@@ -536,20 +779,37 @@ async function loadTV() {
 
     try {
 
-        const response =
-            await fetch(
+        const [
+            tvResponse,
+            providersResponse
+        ] =
+            await Promise.all([
 
-                `${TMDB_BASE_URL}/tv/${tvId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
+                fetch(
 
-            );
+                    `${TMDB_BASE_URL}/tv/${tvId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
+
+                ),
+
+                fetch(
+
+                    `${TMDB_BASE_URL}/tv/${tvId}/watch/providers?api_key=${TMDB_API_KEY}`
+
+                )
+
+            ]);
 
 
         const tv =
-            await response.json();
+            await tvResponse.json();
+
+
+        const providers =
+            await providersResponse.json();
 
 
         if (
-            !response.ok ||
+            !tvResponse.ok ||
             !tv.id
         ) {
 
@@ -564,7 +824,9 @@ async function loadTV() {
             `${tv.name} | CineMind`;
 
 
-        if (tv.backdrop_path) {
+        if (
+            tv.backdrop_path
+        ) {
 
             tvBackdrop.style.backgroundImage =
                 `url("${TMDB_BACKDROP_URL}${tv.backdrop_path}")`;
@@ -572,7 +834,9 @@ async function loadTV() {
         }
 
 
-        if (tv.poster_path) {
+        if (
+            tv.poster_path
+        ) {
 
             tvPoster.src =
                 TMDB_IMAGE_URL +
@@ -713,6 +977,11 @@ async function loadTV() {
         );
 
 
+        renderWatchProviders(
+            providers
+        );
+
+
         tmdbTVButton.href =
             `https://www.themoviedb.org/tv/${tv.id}`;
 
@@ -724,7 +993,9 @@ async function loadTV() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            error
+        );
 
 
         tvTitle.textContent =
@@ -733,6 +1004,17 @@ async function loadTV() {
 
         tvDescription.textContent =
             "There was a problem loading information from TMDB.";
+
+
+        tvWatchProviders.innerHTML = `
+
+            <div class="watch-empty">
+
+                Streaming information could not be loaded.
+
+            </div>
+
+        `;
 
     }
 

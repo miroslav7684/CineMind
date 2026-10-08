@@ -7,6 +7,9 @@ const TMDB_IMAGE_URL =
 const TMDB_BACKDROP_URL =
     "https://image.tmdb.org/t/p/original";
 
+const TMDB_PROVIDER_IMAGE_URL =
+    "https://image.tmdb.org/t/p/original";
+
 
 const params =
     new URLSearchParams(
@@ -102,6 +105,11 @@ const movieReleaseDate =
         "movieReleaseDate"
     );
 
+const movieWatchProviders =
+    document.getElementById(
+        "movieWatchProviders"
+    );
+
 const trailerButton =
     document.getElementById(
         "trailerButton"
@@ -129,7 +137,7 @@ const tmdbMovieButton =
 
 
 // ==================================================
-// LOCAL STORAGE HELPERS
+// LOCAL STORAGE
 // ==================================================
 
 function getSavedArray(key) {
@@ -151,7 +159,7 @@ function getSavedObject(key) {
 
 
 // ==================================================
-// MONEY FORMAT
+// MONEY
 // ==================================================
 
 function formatMoney(value) {
@@ -174,7 +182,7 @@ function formatMoney(value) {
 
 
 // ==================================================
-// MOVIE DATA FOR LIBRARY
+// SAVE MOVIE
 // ==================================================
 
 function saveMovieData(movie) {
@@ -263,7 +271,9 @@ function setupButtons(movie) {
 
 
         if (
-            watched.includes(storageId)
+            watched.includes(
+                storageId
+            )
         ) {
 
             watchedButton.textContent =
@@ -535,6 +545,235 @@ function setupTrailer(videos) {
 
 
 // ==================================================
+// WATCH PROVIDERS
+// ==================================================
+
+function removeDuplicateProviders(
+    providers
+) {
+
+    const unique = [];
+
+    const ids = new Set();
+
+
+    providers.forEach(
+        function(provider) {
+
+            if (
+                !ids.has(
+                    provider.provider_id
+                )
+            ) {
+
+                ids.add(
+                    provider.provider_id
+                );
+
+                unique.push(
+                    provider
+                );
+
+            }
+
+        }
+    );
+
+
+    return unique;
+
+}
+
+
+function providerHTML(provider) {
+
+    return `
+
+        <div class="watch-provider">
+
+            ${
+                provider.logo_path
+
+                    ? `
+                        <img
+                            src="${TMDB_PROVIDER_IMAGE_URL}${provider.logo_path}"
+                            alt="${provider.provider_name}"
+                        >
+                    `
+
+                    : ""
+            }
+
+            <span>
+                ${provider.provider_name}
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+function createProviderGroup(
+    title,
+    providers
+) {
+
+    if (
+        !providers ||
+        !providers.length
+    ) {
+
+        return "";
+
+    }
+
+
+    const cleanProviders =
+        removeDuplicateProviders(
+            providers
+        );
+
+
+    return `
+
+        <div class="watch-provider-group">
+
+            <h3>
+                ${title}
+            </h3>
+
+            <div class="watch-provider-list">
+
+                ${
+                    cleanProviders
+                        .map(
+                            provider =>
+                                providerHTML(
+                                    provider
+                                )
+                        )
+                        .join("")
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function renderWatchProviders(
+    providerData
+) {
+
+    const bulgaria =
+        providerData.results?.BG;
+
+
+    if (!bulgaria) {
+
+        movieWatchProviders.innerHTML = `
+
+            <div class="watch-empty">
+
+                No streaming information is currently
+                available for Bulgaria.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let groups = "";
+
+
+    groups +=
+        createProviderGroup(
+            "▶ Streaming",
+            bulgaria.flatrate
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "🆓 Free",
+            bulgaria.free
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "📺 With Ads",
+            bulgaria.ads
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "💳 Rent",
+            bulgaria.rent
+        );
+
+
+    groups +=
+        createProviderGroup(
+            "🛒 Buy",
+            bulgaria.buy
+        );
+
+
+    if (!groups) {
+
+        groups = `
+
+            <div class="watch-empty">
+
+                No streaming services are currently
+                listed for this movie in Bulgaria.
+
+            </div>
+
+        `;
+
+    }
+
+
+    const link =
+        bulgaria.link
+            ? `
+                <a
+                    class="watch-tmdb-link"
+                    href="${bulgaria.link}"
+                    target="_blank"
+                >
+                    Check availability on TMDB ↗
+                </a>
+            `
+            : "";
+
+
+    movieWatchProviders.innerHTML = `
+
+        <div class="watch-provider-groups">
+            ${groups}
+        </div>
+
+        ${link}
+
+    `;
+
+}
+
+
+// ==================================================
 // LOAD MOVIE
 // ==================================================
 
@@ -552,20 +791,37 @@ async function loadMovie() {
 
     try {
 
-        const response =
-            await fetch(
+        const [
+            movieResponse,
+            providersResponse
+        ] =
+            await Promise.all([
 
-                `${TMDB_BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
+                fetch(
 
-            );
+                    `${TMDB_BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
+
+                ),
+
+                fetch(
+
+                    `${TMDB_BASE_URL}/movie/${movieId}/watch/providers?api_key=${TMDB_API_KEY}`
+
+                )
+
+            ]);
 
 
         const movie =
-            await response.json();
+            await movieResponse.json();
+
+
+        const providers =
+            await providersResponse.json();
 
 
         if (
-            !response.ok ||
+            !movieResponse.ok ||
             !movie.id
         ) {
 
@@ -580,9 +836,9 @@ async function loadMovie() {
             `${movie.title} | CineMind`;
 
 
-        // BACKDROP
-
-        if (movie.backdrop_path) {
+        if (
+            movie.backdrop_path
+        ) {
 
             movieBackdrop.style.backgroundImage =
                 `url("${TMDB_BACKDROP_URL}${movie.backdrop_path}")`;
@@ -590,9 +846,9 @@ async function loadMovie() {
         }
 
 
-        // POSTER
-
-        if (movie.poster_path) {
+        if (
+            movie.poster_path
+        ) {
 
             moviePoster.src =
                 TMDB_IMAGE_URL +
@@ -604,8 +860,6 @@ async function loadMovie() {
         moviePoster.alt =
             `${movie.title} poster`;
 
-
-        // MAIN INFO
 
         movieTitle.textContent =
             movie.title;
@@ -661,8 +915,6 @@ async function loadMovie() {
                 : "Unknown";
 
 
-        // GENRES
-
         movieGenres.innerHTML =
             movie.genres
                 .map(
@@ -671,8 +923,6 @@ async function loadMovie() {
                 )
                 .join("");
 
-
-        // DIRECTOR
 
         const director =
             movie.credits.crew.find(
@@ -688,21 +938,20 @@ async function loadMovie() {
                 : "Unknown";
 
 
-        // CAST
-
         renderCast(
             movie.credits
         );
 
-
-        // TRAILER
 
         setupTrailer(
             movie.videos
         );
 
 
-        // PRODUCTION
+        renderWatchProviders(
+            providers
+        );
+
 
         movieCompanies.textContent =
             movie.production_companies?.length
@@ -735,8 +984,6 @@ async function loadMovie() {
             "Unknown";
 
 
-        // TMDB LINK
-
         tmdbMovieButton.href =
             `https://www.themoviedb.org/movie/${movie.id}`;
 
@@ -759,6 +1006,17 @@ async function loadMovie() {
 
         movieDescription.textContent =
             "There was a problem loading information from TMDB.";
+
+
+        movieWatchProviders.innerHTML = `
+
+            <div class="watch-empty">
+
+                Streaming information could not be loaded.
+
+            </div>
+
+        `;
 
     }
 
