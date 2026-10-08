@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie | CineMind</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>CineMind</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#movies">Movies</a>
+            <a href="my-movies.html">My Movies</a>
+            <a href="#">About</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="movie-details">
+
+            <a href="index.html#movies" class="back-button">
+                ← Back to movies
+            </a>
+
+
+            <div class="details-container">
+
+                <img
+                    id="moviePoster"
+                    class="details-poster"
+                    src=""
+                    alt="Movie poster"
+                >
+
+
+                <div class="details-info">
+
+                    <h2 id="movieTitle"></h2>
+
+
+                    <div class="details-meta">
+
+                        <span id="movieYear"></span>
+
+                        <span id="movieGenre"></span>
+
+                        <span
+                            id="movieRating"
+                            class="rating"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="extra-info">
+
+                        <p>
+                            <strong>Director:</strong>
+                            <span id="movieDirector"></span>
+                        </p>
+
+                        <p>
+                            <strong>Runtime:</strong>
+                            <span id="movieRuntime"></span>
+                        </p>
+
+                        <p>
+                            <strong>Country:</strong>
+                            <span id="movieCountry"></span>
+                        </p>
+
+                        <p>
+                            <strong>Cast:</strong>
+                            <span id="movieCast"></span>
+                        </p>
+
+                    </div>
+
+
+                    <h3 class="overview-title">
+                        Overview
+                    </h3>
+
+                    <p
+                        id="movieDescription"
+                        class="movie-description"
+                    ></p>
+
+
+                    <div class="details-buttons">
+
+                        <button
+                            id="watchedButton"
+                            class="watched-button"
+                        >
+                            ✓ Mark as watched
+                        </button>
+
+
+                        <button
+                            id="watchlistButton"
+                            class="watchlist-button"
+                        >
+                            + Add to Watchlist
+                        </button>
+
+
+                        <button
+                            id="whereToWatchButton"
+                            class="watch-button"
+                        >
+                            ▶ Where to watch
+                        </button>
+
+
+                        <a
+                            id="imdbButton"
+                            class="imdb-button"
+                            href="#"
+                            target="_blank"
+                        >
+                            IMDb
+                        </a>
+
+                    </div>
+
+
+                    <p
+                        id="actionMessage"
+                        class="action-message"
+                    ></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            <span>✦</span>
+            CineMind
+        </div>
+
+        <p>
+            Discover your next favorite movie.
+        </p>
+
+        <p class="copyright">
+            © 2026 CineMind
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

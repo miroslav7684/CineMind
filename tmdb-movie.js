@@ -1,0 +1,768 @@
+const TMDB_BASE_URL =
+    "https://api.themoviedb.org/3";
+
+const TMDB_IMAGE_URL =
+    "https://image.tmdb.org/t/p/w500";
+
+const TMDB_BACKDROP_URL =
+    "https://image.tmdb.org/t/p/original";
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const movieId =
+    params.get("id");
+
+
+const movieBackdrop =
+    document.getElementById(
+        "movieBackdrop"
+    );
+
+const moviePoster =
+    document.getElementById(
+        "moviePoster"
+    );
+
+const movieTitle =
+    document.getElementById(
+        "movieTitle"
+    );
+
+const movieYear =
+    document.getElementById(
+        "movieYear"
+    );
+
+const movieRuntime =
+    document.getElementById(
+        "movieRuntime"
+    );
+
+const movieRating =
+    document.getElementById(
+        "movieRating"
+    );
+
+const movieGenres =
+    document.getElementById(
+        "movieGenres"
+    );
+
+const movieDescription =
+    document.getElementById(
+        "movieDescription"
+    );
+
+const movieDirector =
+    document.getElementById(
+        "movieDirector"
+    );
+
+const movieStatus =
+    document.getElementById(
+        "movieStatus"
+    );
+
+const movieLanguage =
+    document.getElementById(
+        "movieLanguage"
+    );
+
+const movieCountry =
+    document.getElementById(
+        "movieCountry"
+    );
+
+const movieCast =
+    document.getElementById(
+        "movieCast"
+    );
+
+const movieCompanies =
+    document.getElementById(
+        "movieCompanies"
+    );
+
+const movieBudget =
+    document.getElementById(
+        "movieBudget"
+    );
+
+const movieRevenue =
+    document.getElementById(
+        "movieRevenue"
+    );
+
+const movieReleaseDate =
+    document.getElementById(
+        "movieReleaseDate"
+    );
+
+const trailerButton =
+    document.getElementById(
+        "trailerButton"
+    );
+
+const watchedButton =
+    document.getElementById(
+        "watchedButton"
+    );
+
+const watchlistButton =
+    document.getElementById(
+        "watchlistButton"
+    );
+
+const movieActionMessage =
+    document.getElementById(
+        "movieActionMessage"
+    );
+
+const tmdbMovieButton =
+    document.getElementById(
+        "tmdbMovieButton"
+    );
+
+
+// ==================================================
+// LOCAL STORAGE HELPERS
+// ==================================================
+
+function getSavedArray(key) {
+
+    return JSON.parse(
+        localStorage.getItem(key)
+    ) || [];
+
+}
+
+
+function getSavedObject(key) {
+
+    return JSON.parse(
+        localStorage.getItem(key)
+    ) || {};
+
+}
+
+
+// ==================================================
+// MONEY FORMAT
+// ==================================================
+
+function formatMoney(value) {
+
+    if (!value) {
+        return "Not available";
+    }
+
+
+    return new Intl.NumberFormat(
+        "en-US",
+        {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+        }
+    ).format(value);
+
+}
+
+
+// ==================================================
+// MOVIE DATA FOR LIBRARY
+// ==================================================
+
+function saveMovieData(movie) {
+
+    const allMovies =
+        getSavedObject(
+            "tmdbMovieData"
+        );
+
+
+    const key =
+        `tmdb-${movie.id}`;
+
+
+    allMovies[key] = {
+
+        id:
+            movie.id,
+
+        title:
+            movie.title,
+
+        year:
+            movie.release_date
+                ? movie.release_date.substring(
+                    0,
+                    4
+                )
+                : "Unknown",
+
+        rating:
+            movie.vote_average,
+
+        runtime:
+            movie.runtime,
+
+        genre:
+            movie.genres
+                .map(
+                    genre =>
+                        genre.name
+                )
+                .join(", "),
+
+        poster:
+            movie.poster_path
+                ? TMDB_IMAGE_URL +
+                  movie.poster_path
+                : ""
+
+    };
+
+
+    localStorage.setItem(
+        "tmdbMovieData",
+        JSON.stringify(
+            allMovies
+        )
+    );
+
+}
+
+
+// ==================================================
+// WATCHED / WATCHLIST
+// ==================================================
+
+function setupButtons(movie) {
+
+    const storageId =
+        `tmdb-${movie.id}`;
+
+
+    function refreshButtons() {
+
+        const watched =
+            getSavedArray(
+                "watchedMoviesTMDB"
+            );
+
+
+        const watchlist =
+            getSavedArray(
+                "watchlistMoviesTMDB"
+            );
+
+
+        if (
+            watched.includes(storageId)
+        ) {
+
+            watchedButton.textContent =
+                "✓ Watched";
+
+            watchedButton.classList.add(
+                "active"
+            );
+
+        } else {
+
+            watchedButton.textContent =
+                "✓ Mark as Watched";
+
+            watchedButton.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        if (
+            watchlist.includes(
+                storageId
+            )
+        ) {
+
+            watchlistButton.textContent =
+                "✓ In Watchlist";
+
+            watchlistButton.classList.add(
+                "active"
+            );
+
+        } else {
+
+            watchlistButton.textContent =
+                "+ Add to Watchlist";
+
+            watchlistButton.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    watchedButton.addEventListener(
+        "click",
+        function() {
+
+            let watched =
+                getSavedArray(
+                    "watchedMoviesTMDB"
+                );
+
+
+            if (
+                watched.includes(
+                    storageId
+                )
+            ) {
+
+                watched =
+                    watched.filter(
+                        id =>
+                            id !== storageId
+                    );
+
+
+                movieActionMessage.textContent =
+                    "Removed from Watched.";
+
+            } else {
+
+                watched.push(
+                    storageId
+                );
+
+
+                saveMovieData(
+                    movie
+                );
+
+
+                movieActionMessage.textContent =
+                    "Added to Watched.";
+
+            }
+
+
+            localStorage.setItem(
+                "watchedMoviesTMDB",
+                JSON.stringify(
+                    watched
+                )
+            );
+
+
+            refreshButtons();
+
+        }
+    );
+
+
+    watchlistButton.addEventListener(
+        "click",
+        function() {
+
+            let watchlist =
+                getSavedArray(
+                    "watchlistMoviesTMDB"
+                );
+
+
+            if (
+                watchlist.includes(
+                    storageId
+                )
+            ) {
+
+                watchlist =
+                    watchlist.filter(
+                        id =>
+                            id !== storageId
+                    );
+
+
+                movieActionMessage.textContent =
+                    "Removed from Watchlist.";
+
+            } else {
+
+                watchlist.push(
+                    storageId
+                );
+
+
+                saveMovieData(
+                    movie
+                );
+
+
+                movieActionMessage.textContent =
+                    "Added to Watchlist.";
+
+            }
+
+
+            localStorage.setItem(
+                "watchlistMoviesTMDB",
+                JSON.stringify(
+                    watchlist
+                )
+            );
+
+
+            refreshButtons();
+
+        }
+    );
+
+
+    refreshButtons();
+
+}
+
+
+// ==================================================
+// CAST
+// ==================================================
+
+function renderCast(credits) {
+
+    movieCast.innerHTML = "";
+
+
+    const cast =
+        credits.cast
+            .filter(
+                person =>
+                    person.profile_path
+            )
+            .slice(0, 6);
+
+
+    if (!cast.length) {
+
+        movieCast.innerHTML =
+            "<p>No cast information available.</p>";
+
+        return;
+
+    }
+
+
+    cast.forEach(
+        function(person) {
+
+            movieCast.innerHTML += `
+
+                <div class="cast-card">
+
+                    <img
+                        src="${TMDB_IMAGE_URL}${person.profile_path}"
+                        alt="${person.name}"
+                    >
+
+                    <div class="cast-card-info">
+
+                        <strong>
+                            ${person.name}
+                        </strong>
+
+                        <span>
+                            ${person.character || "Cast member"}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// ==================================================
+// TRAILER
+// ==================================================
+
+function setupTrailer(videos) {
+
+    const trailer =
+        videos.results.find(
+            video =>
+                video.site === "YouTube" &&
+                video.type === "Trailer"
+        ) ||
+
+        videos.results.find(
+            video =>
+                video.site === "YouTube"
+        );
+
+
+    if (!trailer) {
+
+        trailerButton.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    trailerButton.href =
+        `https://www.youtube.com/watch?v=${trailer.key}`;
+
+
+    trailerButton.style.display =
+        "inline-flex";
+
+}
+
+
+// ==================================================
+// LOAD MOVIE
+// ==================================================
+
+async function loadMovie() {
+
+    if (!movieId) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                `${TMDB_BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits,videos`
+
+            );
+
+
+        const movie =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !movie.id
+        ) {
+
+            throw new Error(
+                "Movie not found"
+            );
+
+        }
+
+
+        document.title =
+            `${movie.title} | CineMind`;
+
+
+        // BACKDROP
+
+        if (movie.backdrop_path) {
+
+            movieBackdrop.style.backgroundImage =
+                `url("${TMDB_BACKDROP_URL}${movie.backdrop_path}")`;
+
+        }
+
+
+        // POSTER
+
+        if (movie.poster_path) {
+
+            moviePoster.src =
+                TMDB_IMAGE_URL +
+                movie.poster_path;
+
+        }
+
+
+        moviePoster.alt =
+            `${movie.title} poster`;
+
+
+        // MAIN INFO
+
+        movieTitle.textContent =
+            movie.title;
+
+
+        movieYear.textContent =
+            movie.release_date
+                ? movie.release_date.substring(
+                    0,
+                    4
+                )
+                : "Unknown";
+
+
+        movieRuntime.textContent =
+            movie.runtime
+                ? `${movie.runtime} min`
+                : "Unknown runtime";
+
+
+        movieRating.textContent =
+            movie.vote_average
+                ? `⭐ ${movie.vote_average.toFixed(1)}`
+                : "⭐ N/A";
+
+
+        movieDescription.textContent =
+            movie.overview ||
+            "No description available.";
+
+
+        movieStatus.textContent =
+            movie.status ||
+            "Unknown";
+
+
+        movieLanguage.textContent =
+            movie.spoken_languages?.[0]?.english_name ||
+            movie.original_language?.toUpperCase() ||
+            "Unknown";
+
+
+        movieCountry.textContent =
+            movie.production_countries?.length
+
+                ? movie.production_countries
+                    .map(
+                        country =>
+                            country.name
+                    )
+                    .join(", ")
+
+                : "Unknown";
+
+
+        // GENRES
+
+        movieGenres.innerHTML =
+            movie.genres
+                .map(
+                    genre =>
+                        `<span>${genre.name}</span>`
+                )
+                .join("");
+
+
+        // DIRECTOR
+
+        const director =
+            movie.credits.crew.find(
+                person =>
+                    person.job ===
+                    "Director"
+            );
+
+
+        movieDirector.textContent =
+            director
+                ? director.name
+                : "Unknown";
+
+
+        // CAST
+
+        renderCast(
+            movie.credits
+        );
+
+
+        // TRAILER
+
+        setupTrailer(
+            movie.videos
+        );
+
+
+        // PRODUCTION
+
+        movieCompanies.textContent =
+            movie.production_companies?.length
+
+                ? movie.production_companies
+                    .slice(0, 3)
+                    .map(
+                        company =>
+                            company.name
+                    )
+                    .join(", ")
+
+                : "Not available";
+
+
+        movieBudget.textContent =
+            formatMoney(
+                movie.budget
+            );
+
+
+        movieRevenue.textContent =
+            formatMoney(
+                movie.revenue
+            );
+
+
+        movieReleaseDate.textContent =
+            movie.release_date ||
+            "Unknown";
+
+
+        // TMDB LINK
+
+        tmdbMovieButton.href =
+            `https://www.themoviedb.org/movie/${movie.id}`;
+
+
+        setupButtons(
+            movie
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        movieTitle.textContent =
+            "Movie could not be loaded";
+
+
+        movieDescription.textContent =
+            "There was a problem loading information from TMDB.";
+
+    }
+
+}
+
+
+loadMovie();

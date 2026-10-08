@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Movie | CineMind</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+
+<body>
+
+    <header>
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            <span class="logo-icon">✦</span>
+            CineMind
+        </a>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#contentSection">
+                Movies & TV
+            </a>
+
+            <a href="my-movies.html">
+                My Movies
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="details-page">
+
+        <section
+            id="movieBackdrop"
+            class="details-backdrop"
+        >
+
+            <div class="details-backdrop-overlay"></div>
+
+
+            <a
+                href="index.html#contentSection"
+                class="details-back-button"
+            >
+                ← Back to Movies
+            </a>
+
+        </section>
+
+
+        <section class="details-main">
+
+            <div class="details-poster-wrapper">
+
+                <img
+                    id="moviePoster"
+                    class="details-poster"
+                    src=""
+                    alt="Movie poster"
+                >
+
+            </div>
+
+
+            <div class="details-content">
+
+                <div class="details-type-badge">
+                    🎬 MOVIE
+                </div>
+
+
+                <h1 id="movieTitle">
+                    Loading...
+                </h1>
+
+
+                <div class="details-meta">
+
+                    <span id="movieYear">
+                        —
+                    </span>
+
+                    <span>•</span>
+
+                    <span id="movieRuntime">
+                        —
+                    </span>
+
+                    <span>•</span>
+
+                    <span id="movieRating">
+                        ⭐ —
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="movieGenres"
+                    class="details-genres"
+                ></div>
+
+
+                <p
+                    id="movieDescription"
+                    class="details-description"
+                >
+                    Loading movie information...
+                </p>
+
+
+                <div class="details-info-grid">
+
+                    <div class="details-info-box">
+
+                        <span class="details-info-label">
+                            Director
+                        </span>
+
+                        <strong id="movieDirector">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="details-info-box">
+
+                        <span class="details-info-label">
+                            Status
+                        </span>
+
+                        <strong id="movieStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="details-info-box">
+
+                        <span class="details-info-label">
+                            Language
+                        </span>
+
+                        <strong id="movieLanguage">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="details-info-box">
+
+                        <span class="details-info-label">
+                            Country
+                        </span>
+
+                        <strong id="movieCountry">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details-buttons">
+
+                    <button
+                        id="watchedButton"
+                        class="details-action-button"
+                    >
+                        ✓ Mark as Watched
+                    </button>
+
+
+                    <button
+                        id="watchlistButton"
+                        class="details-action-button"
+                    >
+                        + Add to Watchlist
+                    </button>
+
+
+                    <a
+                        id="trailerButton"
+                        href="#"
+                        target="_blank"
+                        class="details-primary-button"
+                        style="display: none;"
+                    >
+                        ▶ Watch Trailer
+                    </a>
+
+                </div>
+
+
+                <p
+                    id="movieActionMessage"
+                    class="details-action-message"
+                ></p>
+
+            </div>
+
+        </section>
+
+
+        <section class="details-section">
+
+            <div class="details-section-heading">
+
+                <p class="section-label">
+                    PEOPLE
+                </p>
+
+                <h2>
+                    Top Cast
+                </h2>
+
+            </div>
+
+
+            <div
+                id="movieCast"
+                class="cast-grid"
+            ></div>
+
+        </section>
+
+
+        <section class="details-section">
+
+            <div class="details-section-heading">
+
+                <p class="section-label">
+                    BEHIND THE MOVIE
+                </p>
+
+                <h2>
+                    Production
+                </h2>
+
+            </div>
+
+
+            <div class="production-grid">
+
+                <div class="production-card">
+
+                    <span>
+                        Production companies
+                    </span>
+
+                    <strong id="movieCompanies">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="production-card">
+
+                    <span>
+                        Budget
+                    </span>
+
+                    <strong id="movieBudget">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="production-card">
+
+                    <span>
+                        Revenue
+                    </span>
+
+                    <strong id="movieRevenue">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="production-card">
+
+                    <span>
+                        Release date
+                    </span>
+
+                    <strong id="movieReleaseDate">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="details-bottom">
+
+            <a
+                id="tmdbMovieButton"
+                href="#"
+                target="_blank"
+                class="tmdb-external-button"
+            >
+                View on TMDB ↗
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script src="config.js"></script>
+    <script src="tmdb-movie.js"></script>
+    
+
+</body>
+
+</html>

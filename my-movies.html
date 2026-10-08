@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Movies | CineMind</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+
+<body>
+
+    <header>
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                ✦
+            </span>
+
+            CineMind
+
+        </a>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#contentSection">
+                Movies & TV
+            </a>
+
+            <a
+                href="my-movies.html"
+                class="active-nav"
+            >
+                My Movies
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="library-page">
+
+        <section class="library-header">
+
+            <p class="section-label">
+                ✦ YOUR LIBRARY
+            </p>
+
+
+            <h1>
+                My Movies & TV
+            </h1>
+
+
+            <p>
+                Keep track of everything you've watched
+                and everything you want to watch next.
+            </p>
+
+        </section>
+
+
+        <section class="library-stats">
+
+            <div class="library-stat-card">
+
+                <span class="library-stat-label">
+                    Watched
+                </span>
+
+                <strong id="watchedCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="library-stat-card">
+
+                <span class="library-stat-label">
+                    Watchlist
+                </span>
+
+                <strong id="watchlistCount">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <section class="library-filter-container">
+
+            <button
+                class="library-filter-button active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+
+            <button
+                class="library-filter-button"
+                data-filter="movie"
+            >
+                🎬 Movies
+            </button>
+
+
+            <button
+                class="library-filter-button"
+                data-filter="tv"
+            >
+                📺 TV Series
+            </button>
+
+        </section>
+
+
+        <!-- WATCHED -->
+
+        <section class="library-section">
+
+            <div class="library-section-heading">
+
+                <div>
+
+                    <p class="section-label">
+                        COMPLETED
+                    </p>
+
+                    <h2>
+                        Watched
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="watchedMoviesList"
+                class="library-movie-list"
+            ></div>
+
+
+            <div
+                id="noWatchedMovies"
+                class="library-empty"
+                style="display: none;"
+            >
+
+                <h3>
+                    Nothing watched yet
+                </h3>
+
+                <p>
+                    Movies and TV series you mark as watched
+                    will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- WATCHLIST -->
+
+        <section class="library-section">
+
+            <div class="library-section-heading">
+
+                <div>
+
+                    <p class="section-label">
+                        WATCH NEXT
+                    </p>
+
+                    <h2>
+                        Watchlist
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="watchlistMoviesList"
+                class="library-movie-list"
+            ></div>
+
+
+            <div
+                id="noWatchlistMovies"
+                class="library-empty"
+                style="display: none;"
+            >
+
+                <h3>
+                    Your Watchlist is empty
+                </h3>
+
+                <p>
+                    Add movies and TV series you want to
+                    watch later.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+
+            <span>
+                ✦
+            </span>
+
+            CineMind
+
+        </div>
+
+
+        <p>
+            Discover your next favorite movie or TV series.
+        </p>
+
+
+        <p class="copyright">
+            © 2026 CineMind
+        </p>
+
+    </footer>
+
+
+    <script src="my-movies.js"></script>
+    
+
+</body>
+
+</html>

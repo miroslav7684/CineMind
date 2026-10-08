@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CineMind</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+
+    <header>
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            <span class="logo-icon">✦</span>
+            <span>CineMind</span>
+        </a>
+
+
+        <nav>
+
+            <a
+                href="index.html"
+                class="active-nav"
+            >
+                Home
+            </a>
+
+            <a href="#contentSection">
+                Movies & TV
+            </a>
+
+            <a href="my-movies.html">
+                My Movies
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-glow"></div>
+
+
+            <div class="hero-content">
+
+                <div class="ai-badge">
+                    ✦ Smart Movie Discovery
+                </div>
+
+
+                <h1>
+
+                    Find the perfect movie
+
+                    <span>
+                        for your mood.
+                    </span>
+
+                </h1>
+
+
+                <p>
+                    Search by title or describe exactly what
+                    you want to watch and let CineMind find
+                    matching movies and TV series.
+                </p>
+
+
+                <div class="search-mode-switch">
+
+                    <button
+                        id="titleSearchMode"
+                        class="search-mode-button active"
+                    >
+                        🔎 Title Search
+                    </button>
+
+
+                    <button
+                        id="smartSearchMode"
+                        class="search-mode-button"
+                    >
+                        ✦ Smart Search
+                    </button>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+
+                    <input
+                        id="movieSearchInput"
+                        type="text"
+                        placeholder="Search for a movie..."
+                    >
+
+
+                    <button id="movieSearchButton">
+                        Search
+                    </button>
+
+                </div>
+
+
+                <p
+                    class="search-example"
+                    id="searchExample"
+                >
+                    Try: "Batman", "Interstellar" or "Saw"
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH RESULTS -->
+
+        <section
+            class="movies search-results-section"
+            id="searchResultsSection"
+            style="display: none;"
+        >
+
+            <div class="movies-heading">
+
+                <div>
+
+                    <p
+                        class="section-label"
+                        id="searchResultLabel"
+                    >
+                        SEARCH RESULTS
+                    </p>
+
+                    <h2 id="searchResultsTitle">
+                        Results
+                    </h2>
+
+                </div>
+
+
+                <div class="search-result-actions">
+
+                    <button
+                        id="randomPickButton"
+                        class="random-pick-button"
+                        style="display: none;"
+                    >
+                        🎲 Pick one for me
+                    </button>
+
+
+                    <button
+                        id="clearSearchButton"
+                        class="back-to-popular"
+                    >
+                        ✕ Clear Search
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="smartSearchInfo"
+                class="smart-search-info"
+                style="display: none;"
+            ></div>
+
+
+            <div
+                class="movie-list"
+                id="searchResultsList"
+            ></div>
+
+        </section>
+
+
+        <!-- MOVIE / TV SWITCH -->
+
+        <section
+            class="content-switch-section"
+            id="contentSection"
+        >
+
+            <div class="content-switch">
+
+                <button
+                    id="moviesModeButton"
+                    class="content-switch-button active"
+                >
+                    🎬 Movies
+                </button>
+
+
+                <button
+                    id="tvModeButton"
+                    class="content-switch-button"
+                >
+                    📺 TV Series
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURED -->
+
+        <section class="featured-wrapper">
+
+            <div
+                id="featuredSection"
+                class="featured-section"
+            >
+
+                <div
+                    id="featuredBackdrop"
+                    class="featured-background"
+                ></div>
+
+
+                <div class="featured-overlay"></div>
+
+
+                <div class="featured-content">
+
+                    <p
+                        id="featuredLabel"
+                        class="featured-label"
+                    >
+                        ✦ FEATURED MOVIE
+                    </p>
+
+
+                    <h2 id="featuredTitle">
+                        Loading...
+                    </h2>
+
+
+                    <div class="featured-meta">
+
+                        <span id="featuredRating">
+                            ⭐ —
+                        </span>
+
+                        <span class="featured-dot">
+                            •
+                        </span>
+
+                        <span id="featuredYear">
+                            —
+                        </span>
+
+                        <span class="featured-dot">
+                            •
+                        </span>
+
+                        <span id="featuredType">
+                            Movie
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        id="featuredOverview"
+                        class="featured-overview"
+                    >
+                        Loading featured title...
+                    </p>
+
+
+                    <div class="featured-buttons">
+
+                        <a
+                            id="featuredDetailsButton"
+                            href="#"
+                            class="featured-main-button"
+                        >
+                            ▶ View Details
+                        </a>
+
+
+                        <button
+                            id="featuredAnotherButton"
+                            class="featured-secondary-button"
+                        >
+                            🎲 Another Pick
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- POPULAR -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+
+                    <p
+                        class="section-label"
+                        id="popularLabel"
+                    >
+                        TRENDING MOVIES
+                    </p>
+
+                    <h2 id="popularTitle">
+                        Popular Movies
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="popularMovies"
+            >
+                <p>Loading...</p>
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 1 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category1Label"
+                    >
+                        DARK & SCARY
+                    </p>
+
+                    <h2 id="category1Title">
+                        Horror
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category1Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category1More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 2 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category2Label"
+                    >
+                        HIGH ENERGY
+                    </p>
+
+                    <h2 id="category2Title">
+                        Action
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category2Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category2More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 3 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category3Label"
+                    >
+                        EXPLORE MORE
+                    </p>
+
+                    <h2 id="category3Title">
+                        Adventure
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category3Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category3More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 4 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category4Label"
+                    >
+                        FEEL GOOD
+                    </p>
+
+                    <h2 id="category4Title">
+                        Comedy
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category4Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category4More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 5 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category5Label"
+                    >
+                        FUTURE & SPACE
+                    </p>
+
+                    <h2 id="category5Title">
+                        Sci-Fi
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category5Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category5More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 6 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category6Label"
+                    >
+                        SECRETS & TWISTS
+                    </p>
+
+                    <h2 id="category6Title">
+                        Mystery
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category6Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category6More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY 7 -->
+
+        <section class="movies genre-section">
+
+            <div class="movies-heading">
+
+                <div>
+                    <p
+                        class="section-label"
+                        id="category7Label"
+                    >
+                        ANIMATED WORLDS
+                    </p>
+
+                    <h2 id="category7Title">
+                        Animation
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                class="movie-list"
+                id="category7Movies"
+            ></div>
+
+
+            <div class="see-more-container">
+
+                <a
+                    id="category7More"
+                    href="#"
+                    class="see-more-button"
+                >
+                    See more →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            <span>✦</span>
+            CineMind
+        </div>
+
+        <p>
+            Discover your next favorite movie or TV series.
+        </p>
+
+        <p class="copyright">
+            © 2026 CineMind
+        </p>
+
+    </footer>
+
+
+    <script src="config.js"></script>
+    <script src="home.js"></script>
+    
+
+</body>
+
+</html>
