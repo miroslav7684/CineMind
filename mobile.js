@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* ==============================================
-       MOBILE MENU
-    ============================================== */
 
     const header = document.querySelector("header");
     const nav = document.querySelector("header nav");
@@ -48,8 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* CLOSE MENU AFTER CLICKING A LINK */
-
+        
         const navLinks =
             nav.querySelectorAll("a");
 
@@ -71,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* CLOSE MENU WHEN SCREEN BECOMES DESKTOP */
+        
 
         window.addEventListener(
             "resize",

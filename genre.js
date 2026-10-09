@@ -38,9 +38,7 @@ const genreMovieList =
     );
 
 
-// =========================
-// PAGE TITLE
-// =========================
+
 
 genreTitle.textContent =
     genreName;
@@ -50,9 +48,7 @@ document.title =
     genreName + " | CineMind";
 
 
-// =========================
-// DESCRIPTIONS
-// =========================
+
 
 const descriptions = {
 
@@ -85,9 +81,7 @@ genreDescription.textContent =
     "Discover movies from this genre.";
 
 
-// =========================
-// CREATE CARD
-// =========================
+
 
 function createMovieCard(movie) {
 
@@ -201,9 +195,7 @@ function createMovieCard(movie) {
 }
 
 
-// =========================
-// LOAD MOVIES
-// =========================
+
 
 async function loadGenreMovies() {
 

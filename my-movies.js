@@ -36,17 +36,13 @@ const manualMovies = {
 };
 
 
-// =========================
-// CURRENT FILTER
-// =========================
+
 
 let currentFilter =
     "all";
 
 
-// =========================
-// STORAGE HELPERS
-// =========================
+
 
 function getSavedArray(name) {
 
@@ -110,9 +106,7 @@ function getSavedObject(name) {
 }
 
 
-// =========================
-// LOAD STORAGE
-// =========================
+
 
 let watchedMovies =
     getSavedArray("watchedMovies");
@@ -146,9 +140,7 @@ let tmdbTVData =
     getSavedObject("tmdbTVData");
 
 
-// =========================
-// ELEMENTS
-// =========================
+
 
 const watchedMoviesList =
     document.getElementById(
@@ -192,9 +184,7 @@ const filterButtons =
     );
 
 
-// =========================
-// CREATE CARD
-// =========================
+
 
 function createCard(
     item,
@@ -332,9 +322,7 @@ function createCard(
 }
 
 
-// =========================
-// MANUAL MOVIE
-// =========================
+
 
 function getManualMovie(key) {
 
@@ -343,9 +331,6 @@ function getManualMovie(key) {
 }
 
 
-// =========================
-// TMDB MOVIE
-// =========================
 
 function getTMDBMovie(key) {
 
@@ -389,9 +374,6 @@ function getTMDBMovie(key) {
 }
 
 
-// =========================
-// TV SERIES
-// =========================
 
 function getTVSeries(key) {
 
@@ -438,9 +420,7 @@ function getTVSeries(key) {
 }
 
 
-// =========================
-// SHOULD SHOW ITEM
-// =========================
+
 
 function shouldShow(item) {
 
@@ -459,9 +439,7 @@ function shouldShow(item) {
 }
 
 
-// =========================
-// RENDER
-// =========================
+
 
 function renderLibrary() {
 
@@ -481,9 +459,7 @@ function renderLibrary() {
         0;
 
 
-    // =========================
-    // MANUAL WATCHED
-    // =========================
+   
 
     watchedMovies.forEach(
         function(key) {
@@ -511,9 +487,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // TMDB MOVIES WATCHED
-    // =========================
+   
 
     watchedMoviesTMDB.forEach(
         function(key) {
@@ -541,9 +515,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // TV WATCHED
-    // =========================
+   
 
     watchedTV.forEach(
         function(key) {
@@ -571,9 +543,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // MANUAL WATCHLIST
-    // =========================
+   
 
     watchlistMovies.forEach(
         function(key) {
@@ -601,9 +571,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // TMDB MOVIE WATCHLIST
-    // =========================
+   
 
     watchlistMoviesTMDB.forEach(
         function(key) {
@@ -631,9 +599,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // TV WATCHLIST
-    // =========================
+ 
 
     watchlistTV.forEach(
         function(key) {
@@ -661,9 +627,7 @@ function renderLibrary() {
     );
 
 
-    // =========================
-    // COUNTERS
-    // =========================
+   
 
     watchedCount.textContent =
         visibleWatched;
@@ -673,9 +637,7 @@ function renderLibrary() {
         visibleWatchlist;
 
 
-    // =========================
-    // EMPTY STATES
-    // =========================
+    
 
     if (visibleWatched === 0) {
 
@@ -708,9 +670,7 @@ function renderLibrary() {
 }
 
 
-// =========================
-// FILTER BUTTONS
-// =========================
+
 
 filterButtons.forEach(
     function(button) {
@@ -749,9 +709,7 @@ filterButtons.forEach(
 );
 
 
-// =========================
-// REMOVE BUTTONS
-// =========================
+
 
 function connectRemoveButtons() {
 
@@ -784,9 +742,7 @@ function connectRemoveButtons() {
 }
 
 
-// =========================
-// REMOVE ITEM
-// =========================
+
 
 function removeItem(
     source,
@@ -838,7 +794,7 @@ function removeItem(
     }
 
 
-    // TMDB MOVIES
+    
 
     if (
         source === "movie" &&
@@ -882,7 +838,7 @@ function removeItem(
     }
 
 
-    // TV SERIES
+    
 
     if (
         source === "tv" &&
@@ -931,8 +887,6 @@ function removeItem(
 }
 
 
-// =========================
-// START
-// =========================
+
 
 renderLibrary();

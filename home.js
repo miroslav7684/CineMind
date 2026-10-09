@@ -7,9 +7,7 @@ const TMDB_BACKDROP_URL =
     "https://image.tmdb.org/t/p/original";
 
 
-// ==================================================
-// MODES
-// ==================================================
+
 
 let currentMode = "movie";
 
@@ -22,9 +20,7 @@ let featuredCandidates = [];
 let currentFeaturedId = null;
 
 
-// ==================================================
-// ELEMENTS
-// ==================================================
+
 
 const moviesModeButton =
     document.getElementById(
@@ -160,9 +156,7 @@ const featuredAnotherButton =
     );
 
 
-// ==================================================
-// CATEGORY ELEMENTS
-// ==================================================
+
 
 const categories = [];
 
@@ -195,9 +189,7 @@ for (let i = 1; i <= 7; i++) {
 }
 
 
-// ==================================================
-// HOME CATEGORIES
-// ==================================================
+
 
 const movieCategories = [
 
@@ -293,9 +285,7 @@ const tvCategories = [
 ];
 
 
-// ==================================================
-// SMART GENRES
-// ==================================================
+
 
 const smartWords = [
 
@@ -623,9 +613,7 @@ const smartWords = [
 ];
 
 
-// ==================================================
-// MOODS
-// ==================================================
+
 
 const moodGroups = [
 
@@ -743,9 +731,7 @@ const moodGroups = [
 ];
 
 
-// ==================================================
-// THEMES
-// ==================================================
+
 
 const themeGroups = [
 
@@ -933,9 +919,7 @@ const themeGroups = [
 ];
 
 
-// ==================================================
-// COUNTRIES
-// ==================================================
+
 
 const countries = [
 
@@ -1042,9 +1026,6 @@ const countries = [
 ];
 
 
-// ==================================================
-// LANGUAGES
-// ==================================================
 
 const languages = [
 
@@ -1131,9 +1112,7 @@ const languages = [
 ];
 
 
-// ==================================================
-// CREATE CARD
-// ==================================================
+
 
 function createCard(item) {
 
@@ -1286,9 +1265,7 @@ function createCard(item) {
 }
 
 
-// ==================================================
-// RENDER
-// ==================================================
+
 
 function renderList(
     container,
@@ -1336,9 +1313,7 @@ function renderList(
 }
 
 
-// ==================================================
-// FEATURED
-// ==================================================
+
 
 async function loadFeatured() {
 
@@ -1509,9 +1484,6 @@ function showRandomFeatured() {
 }
 
 
-// ==================================================
-// POPULAR
-// ==================================================
 
 async function loadPopular() {
 
@@ -1551,9 +1523,6 @@ async function loadPopular() {
 }
 
 
-// ==================================================
-// GENRES
-// ==================================================
 
 async function loadGenre(
     genreId,
@@ -1596,9 +1565,7 @@ async function loadGenre(
 }
 
 
-// ==================================================
-// CURRENT MODE
-// ==================================================
+
 
 function loadCurrentMode() {
 
@@ -1713,9 +1680,7 @@ function loadCurrentMode() {
 }
 
 
-// ==================================================
-// SEARCH MODE
-// ==================================================
+
 
 function updateSearchMode() {
 
@@ -1792,9 +1757,7 @@ function updateSearchMode() {
 }
 
 
-// ==================================================
-// TITLE SEARCH
-// ==================================================
+
 
 async function titleSearch() {
 
@@ -1863,9 +1826,7 @@ async function titleSearch() {
 }
 
 
-// ==================================================
-// NEGATIVE WORD
-// ==================================================
+
 
 function wordIsNegative(
     text,
@@ -1912,9 +1873,7 @@ function wordIsNegative(
 }
 
 
-// ==================================================
-// MOVIE / TV AUTO DETECTION
-// ==================================================
+
 
 function detectContentType(text) {
 
@@ -1948,9 +1907,7 @@ function detectContentType(text) {
 }
 
 
-// ==================================================
-// PERSON DETECTION
-// ==================================================
+
 
 function cleanPersonName(name) {
 
@@ -2041,9 +1998,6 @@ function detectPersonRequests(text) {
 }
 
 
-// ==================================================
-// ANALYZE SMART SEARCH
-// ==================================================
 
 function analyzeSmartSearch(text) {
 
@@ -2877,9 +2831,6 @@ function analyzeSmartSearch(text) {
 }
 
 
-// ==================================================
-// PERSON SEARCH
-// ==================================================
 
 async function findPerson(name) {
 
@@ -2991,9 +2942,7 @@ async function getPersonCredits(
 }
 
 
-// ==================================================
-// SIMILAR CONTENT
-// ==================================================
+
 
 async function getSimilarContent(
     title
@@ -3052,9 +3001,7 @@ async function getSimilarContent(
 }
 
 
-// ==================================================
-// DISCOVER
-// ==================================================
+
 
 async function discoverSmartContent(
     analysis
@@ -3304,9 +3251,6 @@ async function discoverSmartContent(
 }
 
 
-// ==================================================
-// TV SEASONS
-// ==================================================
 
 async function addTVSeasonData(
     items
@@ -3370,9 +3314,7 @@ async function addTVSeasonData(
 }
 
 
-// ==================================================
-// FILTER
-// ==================================================
+
 
 function itemPassesFilters(
     item,
@@ -3525,9 +3467,6 @@ function itemPassesFilters(
 }
 
 
-// ==================================================
-// SCORE
-// ==================================================
 
 function scoreResults(
     items,
@@ -3822,9 +3761,7 @@ function scoreResults(
 }
 
 
-// ==================================================
-// INTERSECTION
-// ==================================================
+
 
 function intersectById(
     first,
@@ -3848,9 +3785,6 @@ function intersectById(
 }
 
 
-// ==================================================
-// SMART INFO
-// ==================================================
 
 function showSmartAnalysis(
     analysis
@@ -4122,9 +4056,6 @@ function showSmartAnalysis(
 }
 
 
-// ==================================================
-// SMART SEARCH
-// ==================================================
 
 async function smartSearch() {
 
@@ -4384,9 +4315,7 @@ async function smartSearch() {
 }
 
 
-// ==================================================
-// RANDOM SMART PICK
-// ==================================================
+
 
 function randomPick() {
 
@@ -4438,9 +4367,7 @@ function randomPick() {
 }
 
 
-// ==================================================
-// RUN SEARCH
-// ==================================================
+
 
 function runSearch() {
 
@@ -4460,9 +4387,7 @@ function runSearch() {
 }
 
 
-// ==================================================
-// SCROLL
-// ==================================================
+
 
 function scrollToResults() {
 
@@ -4476,9 +4401,6 @@ function scrollToResults() {
 }
 
 
-// ==================================================
-// EVENTS
-// ==================================================
 
 moviesModeButton.addEventListener(
     "click",
@@ -4602,8 +4524,1440 @@ clearSearchButton.addEventListener(
 );
 
 
-// ==================================================
-// START
-// ==================================================
+
 
 loadCurrentMode();
+
+const cineMindConcepts = [
+    {
+        name: "Dinosaurs",
+        words: [
+            "динозавър",
+            "динозаври",
+            "dinosaur",
+            "dinosaurs"
+        ],
+        keywords: [
+            "dinosaur"
+        ]
+    },
+    {
+        name: "Weapons",
+        words: [
+            "оръжие",
+            "оръжия",
+            "пистолет",
+            "пистолети",
+            "автомат",
+            "автомати",
+            "пушка",
+            "пушки",
+            "gun",
+            "guns",
+            "weapon",
+            "weapons"
+        ],
+        keywords: [
+            "weapon",
+            "gun"
+        ]
+    },
+    {
+        name: "Killers",
+        words: [
+            "убиец",
+            "убийци",
+            "killer",
+            "killers",
+            "murderer"
+        ],
+        keywords: [
+            "killer",
+            "murder"
+        ]
+    },
+    {
+        name: "Sharks",
+        words: [
+            "акула",
+            "акули",
+            "shark",
+            "sharks"
+        ],
+        keywords: [
+            "shark"
+        ]
+    },
+    {
+        name: "Ghosts",
+        words: [
+            "призрак",
+            "призраци",
+            "дух",
+            "духове",
+            "ghost",
+            "ghosts",
+            "haunted"
+        ],
+        keywords: [
+            "ghost",
+            "haunted"
+        ]
+    },
+    {
+        name: "Demons",
+        words: [
+            "демон",
+            "демони",
+            "demon",
+            "demons",
+            "demonic"
+        ],
+        keywords: [
+            "demon"
+        ]
+    },
+    {
+        name: "Monsters",
+        words: [
+            "чудовище",
+            "чудовища",
+            "monster",
+            "monsters",
+            "creature"
+        ],
+        keywords: [
+            "monster"
+        ]
+    },
+    {
+        name: "Werewolves",
+        words: [
+            "върколак",
+            "върколаци",
+            "werewolf",
+            "werewolves"
+        ],
+        keywords: [
+            "werewolf"
+        ]
+    },
+    {
+        name: "Witches",
+        words: [
+            "вещица",
+            "вещици",
+            "witch",
+            "witches",
+            "witchcraft"
+        ],
+        keywords: [
+            "witch",
+            "witchcraft"
+        ]
+    },
+    {
+        name: "Snipers",
+        words: [
+            "снайперист",
+            "снайперисти",
+            "sniper",
+            "snipers"
+        ],
+        keywords: [
+            "sniper"
+        ]
+    },
+    {
+        name: "Ninjas",
+        words: [
+            "нинджа",
+            "нинджи",
+            "ninja",
+            "ninjas"
+        ],
+        keywords: [
+            "ninja"
+        ]
+    },
+    {
+        name: "Samurai",
+        words: [
+            "самурай",
+            "самураи",
+            "samurai"
+        ],
+        keywords: [
+            "samurai"
+        ]
+    },
+    {
+        name: "Pirates",
+        words: [
+            "пират",
+            "пирати",
+            "pirate",
+            "pirates"
+        ],
+        keywords: [
+            "pirate"
+        ]
+    },
+    {
+        name: "Cars",
+        words: [
+            "кола",
+            "коли",
+            "автомобил",
+            "автомобили",
+            "car",
+            "cars"
+        ],
+        keywords: [
+            "car"
+        ]
+    },
+    {
+        name: "Racing",
+        words: [
+            "състезание",
+            "състезания",
+            "гонки",
+            "гонка",
+            "racing",
+            "race"
+        ],
+        keywords: [
+            "car race",
+            "racing"
+        ]
+    },
+    {
+        name: "Motorcycles",
+        words: [
+            "мотор",
+            "мотори",
+            "мотоциклет",
+            "мотоциклети",
+            "motorcycle",
+            "motorcycles"
+        ],
+        keywords: [
+            "motorcycle"
+        ]
+    },
+    {
+        name: "Planes",
+        words: [
+            "самолет",
+            "самолети",
+            "plane",
+            "planes",
+            "airplane"
+        ],
+        keywords: [
+            "airplane"
+        ]
+    },
+    {
+        name: "Ships",
+        words: [
+            "кораб",
+            "кораби",
+            "ship",
+            "ships"
+        ],
+        keywords: [
+            "ship"
+        ]
+    },
+    {
+        name: "Submarines",
+        words: [
+            "подводница",
+            "подводници",
+            "submarine",
+            "submarines"
+        ],
+        keywords: [
+            "submarine"
+        ]
+    },
+    {
+        name: "Island",
+        words: [
+            "остров",
+            "острови",
+            "island",
+            "islands"
+        ],
+        keywords: [
+            "island"
+        ]
+    },
+    {
+        name: "Jungle",
+        words: [
+            "джунгла",
+            "jungle"
+        ],
+        keywords: [
+            "jungle"
+        ]
+    },
+    {
+        name: "Desert",
+        words: [
+            "пустиня",
+            "desert"
+        ],
+        keywords: [
+            "desert"
+        ]
+    },
+    {
+        name: "Ocean",
+        words: [
+            "океан",
+            "море",
+            "океани",
+            "ocean",
+            "sea"
+        ],
+        keywords: [
+            "ocean"
+        ]
+    },
+    {
+        name: "Forest",
+        words: [
+            "гора",
+            "гори",
+            "forest",
+            "woods"
+        ],
+        keywords: [
+            "forest"
+        ]
+    },
+    {
+        name: "Mountains",
+        words: [
+            "планина",
+            "планини",
+            "mountain",
+            "mountains"
+        ],
+        keywords: [
+            "mountain"
+        ]
+    },
+    {
+        name: "Snow",
+        words: [
+            "сняг",
+            "снежен",
+            "snow",
+            "snowy"
+        ],
+        keywords: [
+            "snow"
+        ]
+    },
+    {
+        name: "Virus",
+        words: [
+            "вирус",
+            "вируси",
+            "virus",
+            "pandemic",
+            "пандемия",
+            "зараза",
+            "инфекция"
+        ],
+        keywords: [
+            "virus",
+            "pandemic"
+        ]
+    },
+    {
+        name: "Police",
+        words: [
+            "полицай",
+            "полицаи",
+            "полиция",
+            "police",
+            "cop",
+            "cops"
+        ],
+        keywords: [
+            "police"
+        ]
+    },
+    {
+        name: "Army",
+        words: [
+            "армия",
+            "войници",
+            "войник",
+            "army",
+            "soldier",
+            "soldiers"
+        ],
+        keywords: [
+            "soldier",
+            "army"
+        ]
+    },
+    {
+        name: "Gang",
+        words: [
+            "банда",
+            "банди",
+            "gang",
+            "gangs"
+        ],
+        keywords: [
+            "gang"
+        ]
+    },
+    {
+        name: "Casino",
+        words: [
+            "казино",
+            "casino"
+        ],
+        keywords: [
+            "casino"
+        ]
+    },
+    {
+        name: "Money",
+        words: [
+            "пари",
+            "богатство",
+            "милионер",
+            "милионери",
+            "money",
+            "millionaire",
+            "rich"
+        ],
+        keywords: [
+            "money"
+        ]
+    },
+    {
+        name: "Robbery",
+        words: [
+            "крадец",
+            "крадци",
+            "кражба",
+            "кражби",
+            "robbery",
+            "thief",
+            "thieves"
+        ],
+        keywords: [
+            "robbery",
+            "thief"
+        ]
+    },
+    {
+        name: "Kidnapping",
+        words: [
+            "отвличане",
+            "отвлечен",
+            "отвлечена",
+            "kidnap",
+            "kidnapping"
+        ],
+        keywords: [
+            "kidnapping"
+        ]
+    },
+    {
+        name: "Revenge",
+        words: [
+            "отмъщение",
+            "мъст",
+            "revenge",
+            "vengeance"
+        ],
+        keywords: [
+            "revenge"
+        ]
+    },
+    {
+        name: "Escape",
+        words: [
+            "бягство",
+            "избягал",
+            "избягва",
+            "escape",
+            "escaping"
+        ],
+        keywords: [
+            "escape"
+        ]
+    },
+    {
+        name: "Fire",
+        words: [
+            "пожар",
+            "огън",
+            "fire",
+            "firefighter"
+        ],
+        keywords: [
+            "fire"
+        ]
+    },
+    {
+        name: "Disaster",
+        words: [
+            "бедствие",
+            "катастрофа",
+            "катастрофи",
+            "disaster",
+            "catastrophe"
+        ],
+        keywords: [
+            "disaster"
+        ]
+    },
+    {
+        name: "Earthquake",
+        words: [
+            "земетресение",
+            "earthquake"
+        ],
+        keywords: [
+            "earthquake"
+        ]
+    },
+    {
+        name: "Tornado",
+        words: [
+            "торнадо",
+            "tornado"
+        ],
+        keywords: [
+            "tornado"
+        ]
+    },
+    {
+        name: "Aliens",
+        words: [
+            "извънземен",
+            "извънземно",
+            "извънземни",
+            "alien",
+            "aliens"
+        ],
+        keywords: [
+            "alien"
+        ]
+    },
+    {
+        name: "Robots",
+        words: [
+            "робот",
+            "роботи",
+            "robot",
+            "robots",
+            "android"
+        ],
+        keywords: [
+            "robot"
+        ]
+    },
+    {
+        name: "Artificial Intelligence",
+        words: [
+            "изкуствен интелект",
+            "artificial intelligence",
+            "ai"
+        ],
+        keywords: [
+            "artificial intelligence"
+        ]
+    },
+    {
+        name: "Virtual Reality",
+        words: [
+            "виртуална реалност",
+            "virtual reality",
+            "vr"
+        ],
+        keywords: [
+            "virtual reality"
+        ]
+    },
+    {
+        name: "Hacking",
+        words: [
+            "хакер",
+            "хакери",
+            "хакване",
+            "hacker",
+            "hackers",
+            "hacking"
+        ],
+        keywords: [
+            "hacker"
+        ]
+    },
+    {
+        name: "Dreams",
+        words: [
+            "сън",
+            "сънища",
+            "dream",
+            "dreams"
+        ],
+        keywords: [
+            "dream"
+        ]
+    },
+    {
+        name: "Memory",
+        words: [
+            "памет",
+            "спомени",
+            "memory",
+            "memories",
+            "amnesia",
+            "амнезия"
+        ],
+        keywords: [
+            "memory",
+            "amnesia"
+        ]
+    },
+    {
+        name: "Twists",
+        words: [
+            "обрат",
+            "обрати",
+            "plot twist",
+            "plot twists",
+            "twist",
+            "twists"
+        ],
+        keywords: [
+            "plot twist"
+        ]
+    },
+    {
+        name: "Cult",
+        words: [
+            "култ",
+            "секта",
+            "секти",
+            "cult"
+        ],
+        keywords: [
+            "cult"
+        ]
+    },
+    {
+        name: "Sport",
+        words: [
+            "спорт",
+            "sports",
+            "athlete",
+            "спортист"
+        ],
+        keywords: [
+            "sport"
+        ]
+    },
+    {
+        name: "Boxing",
+        words: [
+            "бокс",
+            "боксьор",
+            "боксьори",
+            "boxing",
+            "boxer"
+        ],
+        keywords: [
+            "boxing"
+        ]
+    },
+    {
+        name: "Martial Arts",
+        words: [
+            "бойни изкуства",
+            "карате",
+            "кунг фу",
+            "kung fu",
+            "karate",
+            "martial arts"
+        ],
+        keywords: [
+            "martial arts"
+        ]
+    },
+    {
+        name: "Football",
+        words: [
+            "футбол",
+            "football",
+            "soccer"
+        ],
+        keywords: [
+            "football"
+        ]
+    },
+    {
+        name: "Basketball",
+        words: [
+            "баскетбол",
+            "basketball"
+        ],
+        keywords: [
+            "basketball"
+        ]
+    },
+    {
+        name: "Music",
+        words: [
+            "музика",
+            "музикант",
+            "певец",
+            "певица",
+            "music",
+            "musician",
+            "singer"
+        ],
+        keywords: [
+            "music"
+        ]
+    },
+    {
+        name: "Rock",
+        words: [
+            "рок",
+            "rock band",
+            "rock music"
+        ],
+        keywords: [
+            "rock music"
+        ]
+    },
+    {
+        name: "Rap",
+        words: [
+            "рап",
+            "рапър",
+            "рапъри",
+            "rapper",
+            "rap music"
+        ],
+        keywords: [
+            "hip hop"
+        ]
+    }
+];
+
+const originalAnalyzeSmartSearch =
+    analyzeSmartSearch;
+
+analyzeSmartSearch =
+    function(text) {
+
+        const analysis =
+            originalAnalyzeSmartSearch(text);
+
+        const lower =
+            text.toLowerCase();
+
+        analysis.extraConcepts =
+            cineMindConcepts.filter(
+                function(concept) {
+
+                    return concept.words.some(
+                        function(word) {
+
+                            return lower.includes(
+                                word
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        analysis.friendNight =
+            lower.includes("с приятели") ||
+            lower.includes("с компания") ||
+            lower.includes("вечер с приятели") ||
+            lower.includes("movie night") ||
+            lower.includes("with friends");
+
+        analysis.aloneNight =
+            lower.includes("сам вечер") ||
+            lower.includes("сам през нощта") ||
+            lower.includes("гледам сам") ||
+            lower.includes("alone at night");
+
+        analysis.easyWatch =
+            lower.includes("лесен за гледане") ||
+            lower.includes("без много мислене") ||
+            lower.includes("лек за гледане") ||
+            lower.includes("нещо леко") ||
+            lower.includes("easy to watch");
+
+        analysis.manyTwists =
+            lower.includes("много обрати") ||
+            lower.includes("много plot twist") ||
+            lower.includes("много plot twists") ||
+            lower.includes("много неочаквани обрати");
+
+        analysis.surpriseMe =
+            lower.includes("изненадай ме") ||
+            lower.includes("изненада") ||
+            lower.includes("surprise me");
+
+        analysis.lightHorror =
+            lower.includes("не много страшно") ||
+            lower.includes("не много страшен") ||
+            lower.includes("лек horror") ||
+            lower.includes("лек ужас") ||
+            lower.includes("не прекалено страшно");
+
+        analysis.strongGenreIds = [];
+        analysis.softAvoidGenreIds = [];
+
+        smartWords.forEach(
+            function(group) {
+
+                group.words.forEach(
+                    function(word) {
+
+                        const ids =
+                            currentMode === "movie"
+                                ? group.movieGenres
+                                : group.tvGenres;
+
+                        if (
+                            lower.includes(
+                                "много " + word
+                            ) ||
+                            lower.includes(
+                                "повече " + word
+                            ) ||
+                            lower.includes(
+                                "lots of " + word
+                            ) ||
+                            lower.includes(
+                                "more " + word
+                            )
+                        ) {
+
+                            ids.forEach(
+                                function(id) {
+
+                                    if (
+                                        !analysis
+                                            .strongGenreIds
+                                            .includes(id)
+                                    ) {
+
+                                        analysis
+                                            .strongGenreIds
+                                            .push(id);
+
+                                    }
+
+                                }
+                            );
+
+                        }
+
+                        if (
+                            lower.includes(
+                                "малко " + word
+                            ) ||
+                            lower.includes(
+                                "по-малко " + word
+                            ) ||
+                            lower.includes(
+                                "less " + word
+                            )
+                        ) {
+
+                            ids.forEach(
+                                function(id) {
+
+                                    if (
+                                        !analysis
+                                            .softAvoidGenreIds
+                                            .includes(id)
+                                    ) {
+
+                                        analysis
+                                            .softAvoidGenreIds
+                                            .push(id);
+
+                                    }
+
+                                    analysis
+                                        .positiveGenreIds =
+                                        analysis
+                                            .positiveGenreIds
+                                            .filter(
+                                                genreId =>
+                                                    genreId !== id
+                                            );
+
+                                }
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+        return analysis;
+
+    };
+
+
+async function cineMindFindKeyword(
+    keyword
+) {
+
+    try {
+
+        const response =
+            await fetch(
+
+                `${TMDB_BASE_URL}/search/keyword?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(keyword)}&page=1`
+
+            );
+
+        const data =
+            await response.json();
+
+        return (
+            data.results || []
+        )
+            .slice(0, 2)
+            .map(
+                item => item.id
+            );
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+const originalDiscoverSmartContent =
+    discoverSmartContent;
+
+discoverSmartContent =
+    async function(analysis) {
+
+        const normalResults =
+            await originalDiscoverSmartContent(
+                analysis
+            );
+
+        if (
+            !analysis.extraConcepts ||
+            !analysis.extraConcepts.length
+        ) {
+
+            return normalResults;
+
+        }
+
+        const concepts =
+            analysis.extraConcepts.slice(
+                0,
+                3
+            );
+
+        const keywordNames = [];
+
+        concepts.forEach(
+            function(concept) {
+
+                concept.keywords.forEach(
+                    function(keyword) {
+
+                        if (
+                            !keywordNames.includes(
+                                keyword
+                            )
+                        ) {
+
+                            keywordNames.push(
+                                keyword
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+        const keywordSearches =
+            await Promise.all(
+
+                keywordNames.map(
+                    keyword =>
+                        cineMindFindKeyword(
+                            keyword
+                        )
+                )
+
+            );
+
+        const keywordIds =
+            [
+                ...new Set(
+                    keywordSearches.flat()
+                )
+            ];
+
+        if (!keywordIds.length) {
+
+            return normalResults;
+
+        }
+
+        try {
+
+            let url =
+                `${TMDB_BASE_URL}/discover/${currentMode}?api_key=${TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&vote_count.gte=10&with_keywords=${keywordIds.join("|")}&page=1`;
+
+            const responses =
+                await Promise.all([
+
+                    fetch(url),
+
+                    fetch(
+                        url.replace(
+                            "page=1",
+                            "page=2"
+                        )
+                    )
+
+                ]);
+
+            const conceptResults = [];
+
+            for (
+                const response
+                of responses
+            ) {
+
+                const data =
+                    await response.json();
+
+                (
+                    data.results || []
+                ).forEach(
+                    function(item) {
+
+                        conceptResults.push({
+
+                            ...item,
+
+                            cineMindConceptBoost:
+                                concepts.length
+
+                        });
+
+                    }
+                );
+
+            }
+
+            const combined = [
+                ...conceptResults,
+                ...normalResults
+            ];
+
+            const unique = [];
+
+            const usedIds =
+                new Set();
+
+            combined.forEach(
+                function(item) {
+
+                    if (
+                        !usedIds.has(
+                            item.id
+                        )
+                    ) {
+
+                        usedIds.add(
+                            item.id
+                        );
+
+                        unique.push(
+                            item
+                        );
+
+                    }
+
+                }
+            );
+
+            return unique;
+
+        } catch {
+
+            return normalResults;
+
+        }
+
+    };
+
+
+const originalScoreResults =
+    scoreResults;
+
+scoreResults =
+    function(
+        items,
+        analysis
+    ) {
+
+        let results =
+            originalScoreResults(
+                items,
+                analysis
+            );
+
+        results =
+            results.map(
+                function(item) {
+
+                    let extraScore = 0;
+
+                    const genres =
+                        item.genre_ids || [];
+
+                    const overview =
+                        (
+                            item.overview ||
+                            ""
+                        ).toLowerCase();
+
+                    if (
+                        item.cineMindConceptBoost
+                    ) {
+
+                        extraScore +=
+                            14 *
+                            item
+                                .cineMindConceptBoost;
+
+                    }
+
+                    if (
+                        analysis.strongGenreIds
+                    ) {
+
+                        analysis
+                            .strongGenreIds
+                            .forEach(
+                                function(id) {
+
+                                    if (
+                                        genres.includes(
+                                            id
+                                        )
+                                    ) {
+
+                                        extraScore +=
+                                            10;
+
+                                    }
+
+                                }
+                            );
+
+                    }
+
+                    if (
+                        analysis.softAvoidGenreIds
+                    ) {
+
+                        analysis
+                            .softAvoidGenreIds
+                            .forEach(
+                                function(id) {
+
+                                    if (
+                                        genres.includes(
+                                            id
+                                        )
+                                    ) {
+
+                                        extraScore -=
+                                            7;
+
+                                    }
+
+                                }
+                            );
+
+                    }
+
+                    if (
+                        analysis.friendNight
+                    ) {
+
+                        const friendWords = [
+                            "friend",
+                            "friends",
+                            "party",
+                            "fun",
+                            "adventure",
+                            "team",
+                            "group"
+                        ];
+
+                        friendWords.forEach(
+                            function(word) {
+
+                                if (
+                                    overview.includes(
+                                        word
+                                    )
+                                ) {
+
+                                    extraScore += 2;
+
+                                }
+
+                            }
+                        );
+
+                        if (
+                            genres.includes(35) ||
+                            genres.includes(28) ||
+                            genres.includes(12) ||
+                            genres.includes(10759)
+                        ) {
+
+                            extraScore += 5;
+
+                        }
+
+                    }
+
+                    if (
+                        analysis.aloneNight
+                    ) {
+
+                        const nightWords = [
+                            "mystery",
+                            "killer",
+                            "dark",
+                            "secret",
+                            "danger",
+                            "night",
+                            "murder"
+                        ];
+
+                        nightWords.forEach(
+                            function(word) {
+
+                                if (
+                                    overview.includes(
+                                        word
+                                    )
+                                ) {
+
+                                    extraScore += 2;
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+                    if (
+                        analysis.easyWatch
+                    ) {
+
+                        if (
+                            genres.includes(35) ||
+                            genres.includes(10751) ||
+                            genres.includes(16)
+                        ) {
+
+                            extraScore += 8;
+
+                        }
+
+                        if (
+                            genres.includes(27)
+                        ) {
+
+                            extraScore -= 4;
+
+                        }
+
+                    }
+
+                    if (
+                        analysis.manyTwists
+                    ) {
+
+                        const twistWords = [
+                            "secret",
+                            "mystery",
+                            "truth",
+                            "reveal",
+                            "twist",
+                            "deception",
+                            "murder",
+                            "investigation"
+                        ];
+
+                        twistWords.forEach(
+                            function(word) {
+
+                                if (
+                                    overview.includes(
+                                        word
+                                    )
+                                ) {
+
+                                    extraScore += 3;
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+                    if (
+                        analysis.lightHorror
+                    ) {
+
+                        if (
+                            genres.includes(27)
+                        ) {
+
+                            extraScore += 4;
+
+                        }
+
+                        if (
+                            genres.includes(35) ||
+                            genres.includes(9648)
+                        ) {
+
+                            extraScore += 5;
+
+                        }
+
+                    }
+
+                    let newPercent =
+                        item.matchPercent +
+                        Math.round(
+                            extraScore * 1.4
+                        );
+
+                    newPercent =
+                        Math.max(
+                            50,
+                            Math.min(
+                                99,
+                                newPercent
+                            )
+                        );
+
+                    return {
+
+                        ...item,
+
+                        smartScore:
+                            item.smartScore +
+                            extraScore,
+
+                        matchPercent:
+                            newPercent
+
+                    };
+
+                }
+            );
+
+        results.sort(
+            function(a, b) {
+
+                return (
+                    b.smartScore -
+                    a.smartScore
+                );
+
+            }
+        );
+
+        if (
+            analysis.surpriseMe
+        ) {
+
+            const top =
+                results.slice(
+                    0,
+                    20
+                );
+
+            for (
+                let i =
+                    top.length - 1;
+                i > 0;
+                i--
+            ) {
+
+                const j =
+                    Math.floor(
+                        Math.random() *
+                        (i + 1)
+                    );
+
+                [
+                    top[i],
+                    top[j]
+                ] = [
+                    top[j],
+                    top[i]
+                ];
+
+            }
+
+            results = [
+                ...top,
+                ...results.slice(20)
+            ];
+
+        }
+
+        return results;
+
+    };

@@ -98,7 +98,7 @@ const movies = {
 };
 
 
-// GET MOVIE FROM URL
+
 
 const parameters =
     new URLSearchParams(window.location.search);
@@ -118,7 +118,7 @@ if (!movieName || !movies[movieName]) {
         movies[movieName];
 
 
-    // SHOW INFORMATION
+    
 
     document.getElementById("movieTitle").textContent =
         movie.title;
@@ -167,7 +167,7 @@ if (!movieName || !movies[movieName]) {
         document.getElementById("actionMessage");
 
 
-    // LOAD STORAGE
+  
 
     function getSavedArray(name) {
 
@@ -198,7 +198,7 @@ if (!movieName || !movies[movieName]) {
         getSavedArray("watchlistMovies");
 
 
-    // BUTTON DESIGN
+   
 
     function updateButtons() {
 
@@ -241,7 +241,7 @@ if (!movieName || !movies[movieName]) {
     updateButtons();
 
 
-    // WATCHED BUTTON
+    
 
     watchedButton.addEventListener(
         "click",
@@ -282,7 +282,7 @@ if (!movieName || !movies[movieName]) {
     );
 
 
-    // WATCHLIST BUTTON
+   
 
     watchlistButton.addEventListener(
         "click",
@@ -323,7 +323,6 @@ if (!movieName || !movies[movieName]) {
     );
 
 
-    // WHERE TO WATCH
 
     whereToWatchButton.addEventListener(
         "click",

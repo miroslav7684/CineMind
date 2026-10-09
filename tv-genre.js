@@ -41,9 +41,7 @@ document.title =
     genreName + " TV Series | CineMind";
 
 
-// =========================
-// CREATE CARD
-// =========================
+
 
 function createTVCard(tv) {
 
@@ -158,9 +156,6 @@ function createTVCard(tv) {
 }
 
 
-// =========================
-// LOAD
-// =========================
 
 async function loadTVGenre() {
 

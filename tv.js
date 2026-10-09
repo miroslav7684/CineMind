@@ -146,9 +146,6 @@ const tvActionMessage =
     );
 
 
-// ==================================================
-// STORAGE
-// ==================================================
 
 function getSavedArray(key) {
 
@@ -232,9 +229,6 @@ function saveTVData(tv) {
 }
 
 
-// ==================================================
-// BUTTONS
-// ==================================================
 
 function setupTVButtons(tv) {
 
@@ -429,9 +423,7 @@ function setupTVButtons(tv) {
 }
 
 
-// ==================================================
-// CAST
-// ==================================================
+
 
 function renderCast(credits) {
 
@@ -491,9 +483,7 @@ function renderCast(credits) {
 }
 
 
-// ==================================================
-// TRAILER
-// ==================================================
+
 
 function setupTrailer(videos) {
 
@@ -530,9 +520,7 @@ function setupTrailer(videos) {
 }
 
 
-// ==================================================
-// WATCH PROVIDERS
-// ==================================================
+
 
 function removeDuplicateProviders(
     providers
@@ -761,9 +749,6 @@ function renderWatchProviders(
 }
 
 
-// ==================================================
-// LOAD TV
-// ==================================================
 
 async function loadTV() {
 

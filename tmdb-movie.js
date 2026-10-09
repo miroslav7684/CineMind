@@ -136,9 +136,6 @@ const tmdbMovieButton =
     );
 
 
-// ==================================================
-// LOCAL STORAGE
-// ==================================================
 
 function getSavedArray(key) {
 
@@ -158,9 +155,7 @@ function getSavedObject(key) {
 }
 
 
-// ==================================================
-// MONEY
-// ==================================================
+
 
 function formatMoney(value) {
 
@@ -181,9 +176,7 @@ function formatMoney(value) {
 }
 
 
-// ==================================================
-// SAVE MOVIE
-// ==================================================
+
 
 function saveMovieData(movie) {
 
@@ -246,9 +239,7 @@ function saveMovieData(movie) {
 }
 
 
-// ==================================================
-// WATCHED / WATCHLIST
-// ==================================================
+
 
 function setupButtons(movie) {
 
@@ -443,9 +434,7 @@ function setupButtons(movie) {
 }
 
 
-// ==================================================
-// CAST
-// ==================================================
+
 
 function renderCast(credits) {
 
@@ -505,9 +494,7 @@ function renderCast(credits) {
 }
 
 
-// ==================================================
-// TRAILER
-// ==================================================
+
 
 function setupTrailer(videos) {
 
@@ -544,9 +531,7 @@ function setupTrailer(videos) {
 }
 
 
-// ==================================================
-// WATCH PROVIDERS
-// ==================================================
+
 
 function removeDuplicateProviders(
     providers
@@ -773,9 +758,7 @@ function renderWatchProviders(
 }
 
 
-// ==================================================
-// LOAD MOVIE
-// ==================================================
+
 
 async function loadMovie() {
 
