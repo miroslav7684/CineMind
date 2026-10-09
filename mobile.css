@@ -1,0 +1,1097 @@
+/* ==================================================
+   CINEMIND - MOBILE VERSION
+   Работи само на екрани до 768px
+================================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* ==================================================
+       HEADER + MOBILE MENU
+    ================================================== */
+
+    header {
+        position: relative;
+
+        min-height: 68px;
+
+        padding: 0 18px;
+
+        z-index: 1000;
+    }
+
+
+    .logo {
+        font-size: 23px;
+
+        gap: 8px;
+    }
+
+
+    .logo-icon {
+        width: 32px;
+
+        height: 32px;
+
+        border-radius: 9px;
+
+        font-size: 15px;
+    }
+
+
+    .mobile-menu-button {
+        width: 42px;
+
+        height: 42px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border: 1px solid #30303c;
+
+        border-radius: 10px;
+
+        background: #17171f;
+
+        color: white;
+
+        font-size: 23px;
+
+        cursor: pointer;
+    }
+
+
+    header nav {
+        position: absolute;
+
+        top: calc(100% + 1px);
+
+        left: 0;
+
+        right: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 8px 18px 18px;
+
+        background: #0d0d13;
+
+        border-bottom: 1px solid #292934;
+
+        transform: translateY(-12px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        transition:
+            opacity 0.2s,
+            transform 0.2s,
+            visibility 0.2s;
+    }
+
+
+    header nav.mobile-nav-open {
+        transform: translateY(0);
+
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+    }
+
+
+    header nav a {
+        width: 100%;
+
+        padding: 15px 10px;
+
+        border-bottom: 1px solid #1e1e27;
+
+        font-size: 15px;
+    }
+
+
+    header nav a:last-child {
+        border-bottom: none;
+    }
+
+
+    header nav .active-nav::after {
+        display: none;
+    }
+
+
+    header nav .active-nav {
+        color: #a78bfa;
+    }
+
+
+    /* ==================================================
+       HOME HERO
+    ================================================== */
+
+    .hero {
+        min-height: auto;
+
+        padding: 65px 18px 55px;
+    }
+
+
+    .hero-glow {
+        width: 420px;
+
+        height: 300px;
+
+        top: 20px;
+    }
+
+
+    .ai-badge {
+        margin-bottom: 18px;
+
+        padding: 7px 12px;
+
+        font-size: 11px;
+    }
+
+
+    .hero h1 {
+        font-size: 38px;
+
+        line-height: 1.05;
+
+        margin-bottom: 20px;
+    }
+
+
+    .hero-content > p {
+        font-size: 15px;
+
+        line-height: 1.6;
+
+        margin-bottom: 27px;
+    }
+
+
+    /* ==================================================
+       SEARCH MODES
+    ================================================== */
+
+    .search-mode-switch {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 7px;
+
+        padding: 5px;
+    }
+
+
+    .search-mode-button {
+        width: 100%;
+
+        padding: 11px 5px;
+
+        font-size: 12px;
+    }
+
+
+    /* ==================================================
+       SEARCH BAR
+    ================================================== */
+
+    .search-box {
+        width: 100%;
+
+        max-width: 100%;
+
+        display: grid;
+
+        grid-template-columns: auto 1fr;
+
+        padding: 8px;
+
+        border-radius: 14px;
+    }
+
+
+    .search-icon {
+        margin-left: 8px;
+    }
+
+
+    .search-box input {
+        min-width: 0;
+
+        padding: 14px 10px;
+
+        font-size: 16px;
+    }
+
+
+    .search-box button {
+        grid-column: 1 / -1;
+
+        width: 100%;
+
+        margin-top: 6px;
+
+        padding: 13px;
+
+        border-radius: 10px;
+    }
+
+
+    .search-example {
+        padding: 0 10px;
+
+        line-height: 1.5;
+    }
+
+
+    /* ==================================================
+       MOVIES / TV SWITCH
+    ================================================== */
+
+    .content-switch-section {
+        padding:
+            28px 18px
+            5px;
+    }
+
+
+    .content-switch {
+        width: 100%;
+
+        gap: 6px;
+
+        padding: 5px;
+    }
+
+
+    .content-switch-button {
+        flex: 1;
+
+        padding: 11px 5px;
+
+        font-size: 13px;
+    }
+
+
+    /* ==================================================
+       MOVIE SECTIONS
+    ================================================== */
+
+    .movies {
+        padding:
+            48px 18px
+            60px;
+    }
+
+
+    .genre-section {
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .movies-heading {
+        margin-bottom: 20px;
+    }
+
+
+    .movies-heading h2 {
+        font-size: 25px;
+    }
+
+
+    .movie-list {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 18px 11px;
+
+        width: 100%;
+    }
+
+
+    .movie-link {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .movie-card {
+        width: 100%;
+
+        border-radius: 13px;
+    }
+
+
+    .poster-container {
+        width: 100%;
+
+        height: auto;
+
+        aspect-ratio: 2 / 3;
+    }
+
+
+    .poster-container img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+    .movie-info {
+        padding: 11px;
+    }
+
+
+    .movie-info h3 {
+        font-size: 13px;
+
+        line-height: 1.3;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    .genre {
+        font-size: 11px;
+    }
+
+
+    .movie-bottom {
+        font-size: 11px;
+    }
+
+
+    .see-more-container {
+        margin-top: 18px;
+    }
+
+
+    .see-more-button {
+        padding: 9px 12px;
+
+        font-size: 12px;
+    }
+
+
+    /* ==================================================
+       SEARCH RESULTS
+    ================================================== */
+
+    .search-results-section {
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .search-result-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .random-pick-button {
+        width: 100%;
+    }
+
+
+    /* ==================================================
+       FEATURED MOVIE
+    ================================================== */
+
+    .featured-wrapper {
+        padding:
+            0 18px;
+    }
+
+
+    .featured-section {
+        min-height: 480px;
+
+        border-radius: 15px;
+    }
+
+
+    .featured-background {
+        background-position: center;
+    }
+
+
+    .featured-overlay {
+        background:
+            linear-gradient(
+                to top,
+                #09090d 3%,
+                rgba(9, 9, 13, 0.93) 34%,
+                rgba(9, 9, 13, 0.38) 100%
+            );
+    }
+
+
+    .featured-content {
+        min-height: 480px;
+
+        width: 100%;
+
+        justify-content: flex-end;
+
+        padding: 24px 20px;
+    }
+
+
+    .featured-content h2 {
+        font-size: 31px;
+
+        line-height: 1.05;
+    }
+
+
+    .featured-meta {
+        flex-wrap: wrap;
+
+        font-size: 12px;
+    }
+
+
+    .featured-overview {
+        max-width: 100%;
+
+        font-size: 13px;
+
+        line-height: 1.55;
+
+        display: -webkit-box;
+
+        -webkit-line-clamp: 4;
+
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+    }
+
+
+    .featured-buttons {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        width: 100%;
+
+        gap: 9px;
+    }
+
+
+    .featured-buttons > * {
+        width: 100%;
+    }
+
+
+    /* ==================================================
+       GENRE PAGES
+    ================================================== */
+
+    .genre-page {
+        padding:
+            75px 18px
+            65px;
+    }
+
+
+    .genre-page-header,
+    .genre-page-heading {
+        margin-bottom: 25px;
+    }
+
+
+    .genre-page-heading h1,
+    .genre-page-header h1 {
+        font-size: 31px;
+    }
+
+
+    .genre-page-grid,
+    .genre-movie-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 18px 11px;
+    }
+
+
+    /* ==================================================
+       MY MOVIES
+    ================================================== */
+
+    .library-page {
+        padding:
+            75px 18px
+            65px;
+    }
+
+
+    .library-header h1 {
+        font-size: 34px;
+    }
+
+
+    .library-header > p:last-child {
+        font-size: 14px;
+    }
+
+
+    .library-stats {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+
+        gap: 8px;
+
+        width: 100%;
+    }
+
+
+    .library-stat,
+    .library-stat-card {
+        min-width: 0;
+
+        padding: 13px 6px;
+
+        border-radius: 11px;
+    }
+
+
+    .library-stat span,
+    .library-stat-card span {
+        font-size: 22px;
+    }
+
+
+    .library-filter-container {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+
+        gap: 5px;
+    }
+
+
+    .library-filter-button {
+        min-width: 0;
+
+        padding:
+            10px 3px;
+
+        font-size: 12px;
+    }
+
+
+    .library-movie-list {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap:
+            18px
+            11px;
+    }
+
+
+    .library-movie-info {
+        padding: 10px;
+    }
+
+
+    .library-movie-info h3 {
+        font-size: 13px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* ==================================================
+       TMDB MOVIE / TV DETAIL PAGE
+    ================================================== */
+
+    .details-page {
+        padding-bottom: 55px;
+    }
+
+
+    .details-backdrop {
+        height: 270px;
+    }
+
+
+    .details-back-button {
+        top: 18px;
+
+        left: 18px;
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+    }
+
+
+    .details-main {
+        margin-top: -62px;
+
+        padding:
+            0 18px;
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        align-items: start;
+    }
+
+
+    .details-poster-wrapper {
+        width: 155px;
+    }
+
+
+    .details-content {
+        padding-bottom: 0;
+    }
+
+
+    .details-content h1 {
+        font-size: 34px;
+
+        line-height: 1.05;
+    }
+
+
+    .details-description {
+        font-size: 14px;
+
+        line-height: 1.65;
+
+        margin-bottom: 22px;
+    }
+
+
+    .details-meta {
+        gap: 7px;
+
+        font-size: 13px;
+    }
+
+
+    .details-genres span {
+        font-size: 11px;
+
+        padding: 5px 9px;
+    }
+
+
+    .details-info-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 8px;
+    }
+
+
+    .details-info-box {
+        padding: 11px;
+    }
+
+
+    .details-info-box strong {
+        font-size: 13px;
+    }
+
+
+    .details-buttons {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        width: 100%;
+    }
+
+
+    .details-buttons > * {
+        width: 100%;
+    }
+
+
+    /* ==================================================
+       DETAIL SECTIONS
+    ================================================== */
+
+    .details-section,
+    .watch-section,
+    .details-bottom {
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .details-section {
+        margin-top: 55px;
+    }
+
+
+    .details-section-heading h2,
+    .watch-heading h2 {
+        font-size: 24px;
+    }
+
+
+    /* ==================================================
+       CAST
+    ================================================== */
+
+    .cast-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 11px;
+    }
+
+
+    .cast-card-info {
+        padding: 10px;
+    }
+
+
+    .cast-card-info strong {
+        font-size: 12px;
+    }
+
+
+    .cast-card-info span {
+        font-size: 11px;
+    }
+
+
+    /* ==================================================
+       PRODUCTION
+    ================================================== */
+
+    .production-grid {
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+    }
+
+
+    .production-card {
+        padding: 16px;
+    }
+
+
+    /* ==================================================
+       WHERE TO WATCH
+    ================================================== */
+
+    .watch-section {
+        margin-top: 55px;
+    }
+
+
+    .watch-provider-groups {
+        grid-template-columns: 1fr;
+    }
+
+
+    .watch-provider-group {
+        padding: 17px;
+    }
+
+
+    .watch-provider-list {
+        gap: 8px;
+    }
+
+
+    .watch-provider {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .watch-provider img {
+        width: 36px;
+
+        height: 36px;
+    }
+
+
+    /* ==================================================
+       OLD MANUAL MOVIE PAGE
+    ================================================== */
+
+    .movie-details {
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .details-container {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+
+    .details-container > .details-poster {
+        width: 180px;
+
+        max-width: 100%;
+
+        margin: 0 auto;
+    }
+
+
+    .details-info h2 {
+        font-size: 30px;
+    }
+
+
+    /* ==================================================
+       ABOUT PAGE
+    ================================================== */
+
+    .new-about-hero {
+        min-height: auto;
+
+        padding:
+            75px 18px
+            55px;
+    }
+
+
+    .new-about-hero h1 {
+        font-size: 39px;
+
+        line-height: 1.05;
+    }
+
+
+    .new-about-hero-content > p:last-child {
+        font-size: 15px;
+
+        line-height: 1.65;
+    }
+
+
+    .about-glow {
+        width: 360px;
+
+        height: 360px;
+    }
+
+
+    .about-main-section,
+    .about-features-section,
+    .about-engine-section,
+    .about-example-section,
+    .about-tech-section {
+        padding:
+            50px 18px;
+    }
+
+
+    .about-main-grid {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+
+    .about-main-grid h2,
+    .about-section-heading h2,
+    .about-example-card h2 {
+        font-size: 30px;
+    }
+
+
+    .about-feature-grid {
+        grid-template-columns: 1fr;
+
+        gap: 11px;
+    }
+
+
+    .about-feature-card {
+        padding: 21px;
+    }
+
+
+    .engine-flow {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .engine-arrow {
+        transform: rotate(90deg);
+
+        text-align: center;
+    }
+
+
+    .engine-step {
+        min-height: auto;
+    }
+
+
+    .about-example-card {
+        padding: 23px 18px;
+    }
+
+
+    .about-example-query {
+        padding: 15px;
+
+        margin:
+            20px 0
+            16px;
+    }
+
+
+    .about-tech-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 9px;
+    }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
+
+    footer {
+        padding:
+            45px 18px;
+
+        text-align: center;
+    }
+
+}
+
+
+/* ==================================================
+   EXTRA SMALL PHONES
+================================================== */
+
+@media (max-width: 390px) {
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+
+    .movie-list,
+    .genre-page-grid,
+    .genre-movie-grid,
+    .library-movie-list {
+        gap:
+            15px
+            8px;
+    }
+
+
+    .movie-info,
+    .library-movie-info {
+        padding:
+            9px
+            8px;
+    }
+
+
+    .details-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .about-tech-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
