@@ -1007,3 +1007,151 @@ async function loadMovie() {
 
 
 loadMovie();
+const movieTrailerModal =
+    document.createElement("div");
+
+movieTrailerModal.className =
+    "trailer-modal";
+
+movieTrailerModal.innerHTML = `
+    <div class="trailer-modal-box">
+
+        <button
+            class="trailer-modal-close"
+            type="button"
+        >
+            ✕
+        </button>
+
+        <div class="trailer-video-box">
+
+            <iframe
+                class="trailer-video"
+                src=""
+                title="Movie trailer"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+
+        </div>
+
+    </div>
+`;
+
+document.body.appendChild(
+    movieTrailerModal
+);
+
+
+const movieTrailerFrame =
+    movieTrailerModal.querySelector(
+        ".trailer-video"
+    );
+
+const movieTrailerClose =
+    movieTrailerModal.querySelector(
+        ".trailer-modal-close"
+    );
+
+
+function closeMovieTrailer() {
+
+    movieTrailerModal.classList.remove(
+        "active"
+    );
+
+    movieTrailerFrame.src = "";
+
+    document.body.style.overflow = "";
+
+}
+
+
+trailerButton.addEventListener(
+    "click",
+    function(event) {
+
+        const href =
+            trailerButton.href;
+
+        if (
+            !href ||
+            href.endsWith("#")
+        ) {
+            return;
+        }
+
+        event.preventDefault();
+
+        try {
+
+            const url =
+                new URL(href);
+
+            const videoKey =
+                url.searchParams.get("v");
+
+            if (!videoKey) {
+                return;
+            }
+
+            movieTrailerFrame.src =
+                `https://www.youtube-nocookie.com/embed/${videoKey}?autoplay=1&rel=0`;
+
+            movieTrailerModal.classList.add(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+movieTrailerClose.addEventListener(
+    "click",
+    closeMovieTrailer
+);
+
+
+movieTrailerModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            movieTrailerModal
+        ) {
+
+            closeMovieTrailer();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            movieTrailerModal
+                .classList
+                .contains("active")
+        ) {
+
+            closeMovieTrailer();
+
+        }
+
+    }
+);

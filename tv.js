@@ -482,22 +482,40 @@ function renderCast(credits) {
 
 }
 
-
-
-
 function setupTrailer(videos) {
 
+    const youtubeVideos =
+        (videos.results || [])
+            .filter(
+                video =>
+                    video.site === "YouTube"
+            );
+
+
     const trailer =
-        videos.results.find(
+        youtubeVideos.find(
             video =>
-                video.site === "YouTube" &&
+                video.type === "Trailer" &&
+                video.official
+        ) ||
+
+        youtubeVideos.find(
+            video =>
                 video.type === "Trailer"
         ) ||
 
-        videos.results.find(
+        youtubeVideos.find(
             video =>
-                video.site === "YouTube"
-        );
+                video.type === "Teaser" &&
+                video.official
+        ) ||
+
+        youtubeVideos.find(
+            video =>
+                video.type === "Teaser"
+        ) ||
+
+        youtubeVideos[0];
 
 
     if (!trailer) {
@@ -514,10 +532,17 @@ function setupTrailer(videos) {
         `https://www.youtube.com/watch?v=${trailer.key}`;
 
 
+    tvTrailerButton.dataset.videoKey =
+        trailer.key;
+
+
     tvTrailerButton.style.display =
         "inline-flex";
 
 }
+
+
+
 
 
 
@@ -1007,3 +1032,151 @@ async function loadTV() {
 
 
 loadTV();
+const tvTrailerModal =
+    document.createElement("div");
+
+tvTrailerModal.className =
+    "trailer-modal";
+
+tvTrailerModal.innerHTML = `
+    <div class="trailer-modal-box">
+
+        <button
+            class="trailer-modal-close"
+            type="button"
+        >
+            ✕
+        </button>
+
+        <div class="trailer-video-box">
+
+            <iframe
+                class="trailer-video"
+                src=""
+                title="TV trailer"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+            ></iframe>
+
+        </div>
+
+    </div>
+`;
+
+document.body.appendChild(
+    tvTrailerModal
+);
+
+
+const tvTrailerFrame =
+    tvTrailerModal.querySelector(
+        ".trailer-video"
+    );
+
+const tvTrailerClose =
+    tvTrailerModal.querySelector(
+        ".trailer-modal-close"
+    );
+
+
+function closeTVTrailer() {
+
+    tvTrailerModal.classList.remove(
+        "active"
+    );
+
+    tvTrailerFrame.src = "";
+
+    document.body.style.overflow = "";
+
+}
+
+
+tvTrailerButton.addEventListener(
+    "click",
+    function(event) {
+
+        const href =
+            tvTrailerButton.href;
+
+        if (
+            !href ||
+            href.endsWith("#")
+        ) {
+            return;
+        }
+
+        event.preventDefault();
+
+        try {
+
+            const url =
+                new URL(href);
+
+            const videoKey =
+                url.searchParams.get("v");
+
+            if (!videoKey) {
+                return;
+            }
+
+            tvTrailerFrame.src =
+                `https://www.youtube-nocookie.com/embed/${videoKey}?autoplay=1&rel=0`;
+
+            tvTrailerModal.classList.add(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+tvTrailerClose.addEventListener(
+    "click",
+    closeTVTrailer
+);
+
+
+tvTrailerModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            tvTrailerModal
+        ) {
+
+            closeTVTrailer();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            tvTrailerModal
+                .classList
+                .contains("active")
+        ) {
+
+            closeTVTrailer();
+
+        }
+
+    }
+);
