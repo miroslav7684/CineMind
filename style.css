@@ -87,8 +87,9 @@ header {
 
 nav {
     display: flex;
-
     gap: 30px;
+    margin-left: auto;
+    margin-right: 18px;
 }
 
 
@@ -1359,7 +1360,13 @@ footer {
     transform: translateY(-2px);
 }
 .back-to-popular {
-    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+    padding: 10px 16px;
 
     background-color: #181820;
 
@@ -1369,11 +1376,12 @@ footer {
 
     border-radius: 9px;
 
+    text-decoration: none;
+
     cursor: pointer;
 
     transition: 0.2s;
 }
-
 
 .back-to-popular:hover {
     background-color: #242431;
@@ -4128,4 +4136,7 @@ footer {
         padding: 25px;
     }
 
+}
+.mobile-menu-button {
+    display: none;
 }

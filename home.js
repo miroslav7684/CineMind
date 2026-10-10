@@ -5961,3 +5961,872 @@ scoreResults =
         return results;
 
     };
+    const cmSearch =
+    smartSearch;
+
+async function cmAskAI(text) {
+
+    try {
+
+        const response =
+            await fetch(
+                "https://red-truth-95d3cinemind-ai.miroslavvasilev101.workers.dev",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        text: text
+                    })
+                }
+            );
+
+        if (!response.ok) {
+            return null;
+        }
+
+        return await response.json();
+
+    } catch {
+
+        return null;
+
+    }
+
+}
+
+
+function cmAddUnique(
+    array,
+    value
+) {
+
+    if (
+        value !== null &&
+        value !== undefined &&
+        !array.includes(value)
+    ) {
+
+        array.push(value);
+
+    }
+
+}
+
+
+function cmFindGenre(
+    name,
+    mode
+) {
+
+    if (!name) {
+        return [];
+    }
+
+    const lower =
+        String(name).toLowerCase();
+
+    const group =
+        smartWords.find(
+            function(item) {
+
+                return (
+                    item.name
+                        .toLowerCase() ===
+                    lower
+                );
+
+            }
+        );
+
+    if (!group) {
+        return [];
+    }
+
+    return (
+        mode === "movie"
+            ? group.movieGenres
+            : group.tvGenres
+    );
+
+}
+
+
+function cmMergeAI(
+    analysis,
+    ai
+) {
+
+    if (!ai) {
+        return analysis;
+    }
+
+
+    if (
+        ai.type === "movie" ||
+        ai.type === "tv"
+    ) {
+
+        analysis.detectedType =
+            ai.type;
+
+    }
+
+
+    if (
+        Array.isArray(
+            ai.genres
+        )
+    ) {
+
+        ai.genres.forEach(
+            function(name) {
+
+                const group =
+                    smartWords.find(
+                        item =>
+                            item.name
+                                .toLowerCase() ===
+                            String(name)
+                                .toLowerCase()
+                    );
+
+                const ids =
+                    cmFindGenre(
+                        name,
+                        currentMode
+                    );
+
+                ids.forEach(
+                    id =>
+                        cmAddUnique(
+                            analysis
+                                .positiveGenreIds,
+                            id
+                        )
+                );
+
+                if (group) {
+
+                    cmAddUnique(
+                        analysis
+                            .positiveGenreNames,
+                        group.name
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (
+        Array.isArray(
+            ai.excludeGenres
+        )
+    ) {
+
+        ai.excludeGenres.forEach(
+            function(name) {
+
+                const group =
+                    smartWords.find(
+                        item =>
+                            item.name
+                                .toLowerCase() ===
+                            String(name)
+                                .toLowerCase()
+                    );
+
+                const ids =
+                    cmFindGenre(
+                        name,
+                        currentMode
+                    );
+
+                ids.forEach(
+                    function(id) {
+
+                        cmAddUnique(
+                            analysis
+                                .negativeGenreIds,
+                            id
+                        );
+
+                        analysis
+                            .positiveGenreIds =
+                            analysis
+                                .positiveGenreIds
+                                .filter(
+                                    genreId =>
+                                        genreId !== id
+                                );
+
+                    }
+                );
+
+                if (group) {
+
+                    cmAddUnique(
+                        analysis
+                            .negativeGenreNames,
+                        group.name
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (
+        Array.isArray(
+            ai.moods
+        )
+    ) {
+
+        ai.moods.forEach(
+            function(name) {
+
+                const group =
+                    moodGroups.find(
+                        item =>
+                            item.name
+                                .toLowerCase() ===
+                            String(name)
+                                .toLowerCase()
+                    );
+
+                if (!group) {
+                    return;
+                }
+
+                cmAddUnique(
+                    analysis.moods,
+                    group.name
+                );
+
+                group
+                    .overviewWords
+                    .forEach(
+                        word =>
+                            cmAddUnique(
+                                analysis
+                                    .moodOverviewWords,
+                                word
+                            )
+                    );
+
+            }
+        );
+
+    }
+
+
+    if (
+        Array.isArray(
+            ai.themes
+        )
+    ) {
+
+        ai.themes.forEach(
+            function(name) {
+
+                const group =
+                    themeGroups.find(
+                        item =>
+                            item.name
+                                .toLowerCase() ===
+                            String(name)
+                                .toLowerCase()
+                    );
+
+                if (!group) {
+                    return;
+                }
+
+                cmAddUnique(
+                    analysis.themes,
+                    group.name
+                );
+
+                group
+                    .overviewWords
+                    .forEach(
+                        word =>
+                            cmAddUnique(
+                                analysis
+                                    .themeOverviewWords,
+                                word
+                            )
+                    );
+
+            }
+        );
+
+    }
+
+
+    if (
+        Array.isArray(
+            ai.keywords
+        )
+    ) {
+
+        ai.keywords.forEach(
+            function(word) {
+
+                if (!word) {
+                    return;
+                }
+
+                cmAddUnique(
+                    analysis
+                        .themeOverviewWords,
+                    String(word)
+                        .toLowerCase()
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        ai.minimumYear !== null &&
+        ai.minimumYear !== undefined
+    ) {
+
+        analysis.minimumYear =
+            Number(
+                ai.minimumYear
+            );
+
+    }
+
+
+    if (
+        ai.maximumYear !== null &&
+        ai.maximumYear !== undefined
+    ) {
+
+        analysis.maximumYear =
+            Number(
+                ai.maximumYear
+            );
+
+    }
+
+
+    if (
+        ai.minimumRating !== null &&
+        ai.minimumRating !== undefined
+    ) {
+
+        analysis.minimumRating =
+            Number(
+                ai.minimumRating
+            );
+
+    }
+
+
+    if (
+        ai.maximumRating !== null &&
+        ai.maximumRating !== undefined
+    ) {
+
+        analysis.maximumRating =
+            Number(
+                ai.maximumRating
+            );
+
+    }
+
+
+    if (
+        ai.maximumRuntime !== null &&
+        ai.maximumRuntime !== undefined
+    ) {
+
+        analysis.maximumRuntime =
+            Number(
+                ai.maximumRuntime
+            );
+
+    }
+
+
+    if (
+        ai.minimumRuntime !== null &&
+        ai.minimumRuntime !== undefined
+    ) {
+
+        analysis.minimumRuntime =
+            Number(
+                ai.minimumRuntime
+            );
+
+    }
+
+
+    if (
+        ai.maximumSeasons !== null &&
+        ai.maximumSeasons !== undefined
+    ) {
+
+        analysis.maximumSeasons =
+            Number(
+                ai.maximumSeasons
+            );
+
+    }
+
+
+    if (
+        ai.minimumSeasons !== null &&
+        ai.minimumSeasons !== undefined
+    ) {
+
+        analysis.minimumSeasons =
+            Number(
+                ai.minimumSeasons
+            );
+
+    }
+
+
+    if (
+        ai.actor
+    ) {
+
+        analysis.actor =
+            ai.actor;
+
+    }
+
+
+    if (
+        ai.director
+    ) {
+
+        analysis.director =
+            ai.director;
+
+    }
+
+
+    if (
+        ai.similarTo
+    ) {
+
+        analysis.similarTitle =
+            ai.similarTo;
+
+    }
+
+
+    if (
+        ai.popularity
+    ) {
+
+        const popularity =
+            String(
+                ai.popularity
+            ).toLowerCase();
+
+        if (
+            popularity.includes(
+                "popular"
+            )
+        ) {
+
+            analysis
+                .popularityPreference =
+                "popular";
+
+        }
+
+        if (
+            popularity.includes(
+                "underrated"
+            ) ||
+            popularity.includes(
+                "hidden"
+            )
+        ) {
+
+            analysis
+                .popularityPreference =
+                "underrated";
+
+        }
+
+    }
+
+
+    if (
+        ai.country
+    ) {
+
+        const value =
+            String(
+                ai.country
+            ).toLowerCase();
+
+        const country =
+            countries.find(
+                function(item) {
+
+                    return (
+                        item.code
+                            .toLowerCase() ===
+                            value ||
+                        item.name
+                            .toLowerCase() ===
+                            value ||
+                        item.words.some(
+                            word =>
+                                word
+                                    .toLowerCase() ===
+                                value
+                        )
+                    );
+
+                }
+            );
+
+        if (country) {
+
+            analysis.country =
+                country.code;
+
+            analysis.countryName =
+                country.name;
+
+        }
+
+    }
+
+
+    if (
+        ai.language
+    ) {
+
+        const value =
+            String(
+                ai.language
+            ).toLowerCase();
+
+        const language =
+            languages.find(
+                function(item) {
+
+                    return (
+                        item.code
+                            .toLowerCase() ===
+                            value ||
+                        item.name
+                            .toLowerCase() ===
+                            value ||
+                        item.words.some(
+                            word =>
+                                word
+                                    .toLowerCase() ===
+                                value
+                        )
+                    );
+
+                }
+            );
+
+        if (language) {
+
+            analysis.language =
+                language.code;
+
+            analysis.languageName =
+                language.name;
+
+        }
+
+    }
+
+
+    return analysis;
+
+}
+
+
+smartSearch =
+    async function() {
+
+        const text =
+            searchInput.value.trim();
+
+        if (!text) {
+            return;
+        }
+
+
+        searchResultLabel.textContent =
+            "SMART RECOMMENDATIONS";
+
+        searchResultsTitle.textContent =
+            "CineMind recommends";
+
+        searchResultsSection.style.display =
+            "block";
+
+        searchResultsList.innerHTML =
+            "<p>Understanding what you want...</p>";
+
+        randomPickButton.style.display =
+            "none";
+
+
+        const ai =
+            await cmAskAI(
+                text
+            );
+
+
+        if (!ai) {
+
+            return cmSearch();
+
+        }
+
+
+        let detected =
+            ai.type ||
+            detectContentType(
+                text
+            );
+
+
+        if (
+            detected &&
+            detected !== currentMode
+        ) {
+
+            currentMode =
+                detected;
+
+
+            if (
+                currentMode ===
+                "movie"
+            ) {
+
+                moviesModeButton
+                    .classList
+                    .add(
+                        "active"
+                    );
+
+                tvModeButton
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+            } else {
+
+                tvModeButton
+                    .classList
+                    .add(
+                        "active"
+                    );
+
+                moviesModeButton
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+            }
+
+        }
+
+
+        let analysis =
+            analyzeSmartSearch(
+                text
+            );
+
+
+        analysis =
+            cmMergeAI(
+                analysis,
+                ai
+            );
+
+
+        showSmartAnalysis(
+            analysis
+        );
+
+
+        try {
+
+            let items = [];
+
+
+            if (
+                analysis.similarTitle
+            ) {
+
+                items =
+                    await getSimilarContent(
+                        analysis.similarTitle
+                    );
+
+            }
+
+
+            let actorItems =
+                null;
+
+            let directorItems =
+                null;
+
+
+            if (
+                analysis.actor
+            ) {
+
+                actorItems =
+                    await getPersonCredits(
+                        analysis.actor,
+                        "actor"
+                    );
+
+            }
+
+
+            if (
+                analysis.director
+            ) {
+
+                directorItems =
+                    await getPersonCredits(
+                        analysis.director,
+                        "director"
+                    );
+
+            }
+
+
+            if (
+                actorItems &&
+                directorItems
+            ) {
+
+                items =
+                    intersectById(
+                        actorItems,
+                        directorItems
+                    );
+
+            } else if (
+                actorItems
+            ) {
+
+                items =
+                    actorItems;
+
+            } else if (
+                directorItems
+            ) {
+
+                items =
+                    directorItems;
+
+            }
+
+
+            if (
+                !items.length
+            ) {
+
+                items =
+                    await discoverSmartContent(
+                        analysis
+                    );
+
+            }
+
+
+            if (
+                currentMode === "tv" &&
+                (
+                    analysis.maximumSeasons ||
+                    analysis.minimumSeasons
+                )
+            ) {
+
+                items =
+                    await addTVSeasonData(
+                        items
+                    );
+
+            }
+
+
+            const scored =
+                scoreResults(
+                    items,
+                    analysis
+                );
+
+
+            lastSmartResults =
+                scored.slice(
+                    0,
+                    12
+                );
+
+
+            renderList(
+                searchResultsList,
+                lastSmartResults
+            );
+
+
+            if (
+                lastSmartResults.length
+            ) {
+
+                randomPickButton.style.display =
+                    "inline-flex";
+
+                randomPickButton.textContent =
+                    "🎲 Pick one for me";
+
+            }
+
+
+            scrollToResults();
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+            return cmSearch();
+
+        }
+
+    };

@@ -29,7 +29,7 @@ const genreTitle =
 
 const genreTVList =
     document.getElementById(
-        "genreTVList"
+        "genreMovies"
     );
 
 

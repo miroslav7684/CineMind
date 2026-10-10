@@ -34,9 +34,8 @@ const genreDescription =
 
 const genreMovieList =
     document.getElementById(
-        "genreMovieList"
+        "genreMovies"
     );
-
 
 
 
